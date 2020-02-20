@@ -18,11 +18,15 @@ public class Alumno implements Serializable {
 	@Column(name="ID_ALUMNO")
 	private Long idAlumno;
 
-	private String apellido;
+	private String pNombre;
+	
+	private String sNombre;
+	
+	private String apellidoP;
+	
+	private String apellidoM;
 
-	private String nombre;
-
-	private int token;
+	private String token;
 
 	//uni-directional many-to-one association to Curso
 	@ManyToOne
@@ -44,40 +48,68 @@ public class Alumno implements Serializable {
 	public Alumno() {
 	}
 
+	public Alumno(Long idAlumno, String pNombre, String sNombre, String apellidoP, String apellidoM, String token,
+			Curso curso, List<Ramo> ramos) {
+		this.idAlumno = idAlumno;
+		this.pNombre = pNombre;
+		this.sNombre = sNombre;
+		this.apellidoP = apellidoP;
+		this.apellidoM = apellidoM;
+		this.token = token;
+		this.curso = curso;
+		this.ramos = ramos;
+	}
+
 	public Long getIdAlumno() {
-		return this.idAlumno;
+		return idAlumno;
 	}
 
 	public void setIdAlumno(Long idAlumno) {
 		this.idAlumno = idAlumno;
 	}
 
-	public String getApellido() {
-		return this.apellido;
+	public String getpNombre() {
+		return pNombre;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setpNombre(String pNombre) {
+		this.pNombre = pNombre;
 	}
 
-	public String getNombre() {
-		return this.nombre;
+	public String getsNombre() {
+		return sNombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setsNombre(String sNombre) {
+		this.sNombre = sNombre;
 	}
 
-	public int getToken() {
-		return this.token;
+	public String getApellidoP() {
+		return apellidoP;
 	}
 
-	public void setToken(int token) {
+	public void setApellidoP(String apellidoP) {
+		this.apellidoP = apellidoP;
+	}
+
+	public String getApellidoM() {
+		return apellidoM;
+	}
+
+	public void setApellidoM(String apellidoM) {
+		this.apellidoM = apellidoM;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
 		this.token = token;
 	}
 
 	public Curso getCurso() {
-		return this.curso;
+		return curso;
 	}
 
 	public void setCurso(Curso curso) {
@@ -85,11 +117,13 @@ public class Alumno implements Serializable {
 	}
 
 	public List<Ramo> getRamos() {
-		return this.ramos;
+		return ramos;
 	}
 
 	public void setRamos(List<Ramo> ramos) {
 		this.ramos = ramos;
 	}
+	
+	
 
 }
