@@ -30,10 +30,6 @@ public class Profesor implements Serializable {
 
 	private String usuario;
 
-	//uni-directional many-to-one association to Curso
-	@ManyToOne
-	private Curso curso;
-
 	//uni-directional many-to-many association to Rol
 	@ManyToMany
 	@JoinTable(
@@ -48,6 +44,18 @@ public class Profesor implements Serializable {
 	private List<Rol> rols;
 
 	public Profesor() {
+	}
+
+	public Profesor(Long idProfesor, String apellido, String especialidad, String nombre, String password, String token,
+			String usuario, List<Rol> rols) {
+		this.idProfesor = idProfesor;
+		this.apellido = apellido;
+		this.especialidad = especialidad;
+		this.nombre = nombre;
+		this.password = password;
+		this.token = token;
+		this.usuario = usuario;
+		this.rols = rols;
 	}
 
 	public Long getIdProfesor() {
@@ -104,14 +112,6 @@ public class Profesor implements Serializable {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
-	}
-
-	public Curso getCurso() {
-		return this.curso;
-	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
 	}
 
 	public List<Rol> getRols() {

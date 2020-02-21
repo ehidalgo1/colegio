@@ -81,7 +81,7 @@ public class AdminAlumnosController {
 
 	@ResponseBody
 	@PostMapping("/guardar-alumno")
-	public Integer guardarAlumno(@RequestParam("p_nombre") String pNombre, @RequestParam("s_nombre") String sNombre,
+	public Integer guardarAlumno(@RequestParam("nombre") String nombre,
 			@RequestParam("apellido_p") String apellidoP, @RequestParam("apellido_m") String apellidoM,
 			@RequestParam("token_curso") String tokenCurso) {
 
@@ -92,8 +92,9 @@ public class AdminAlumnosController {
 
 		try {
 
-//			alumnoFind = alumnoDAO.crud().findByPnombreAndApellidoP(pNombre, apellidoP);
-//			if (alumnoFind == null) {
+			alumnoFind = alumnoDAO.crud().buscarPorNombreAndApellido(nombre, apellidoP);
+			
+			if (alumnoFind == null) {
 				
 				cursoFind = cursoDAO.crud().findByToken(tokenCurso);
 				
@@ -101,8 +102,7 @@ public class AdminAlumnosController {
 
 					Long idAlumno = (long) 0;
 
-					alumno = new Alumno(idAlumno, pNombre, sNombre, apellidoP, apellidoM, funDAO.funcionToken(),
-							cursoFind, null);
+					alumno = new Alumno(idAlumno, apellidoM, apellidoP, nombre, funDAO.funcionToken(), cursoFind, null);
 
 					alumnoDAO.crud().save(alumno);
 
@@ -110,11 +110,12 @@ public class AdminAlumnosController {
 
 				}
 				
-//			} else {
-//				// el alumno existe
-//				respuestaServidor = 100;
-//
-//			}
+			} else {
+				
+				// el alumno existe
+				respuestaServidor = 100;
+
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

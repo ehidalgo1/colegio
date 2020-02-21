@@ -1,4 +1,4 @@
-package com.colegio.interfaces;
+package com.colegio.DAO.interfaces;
 
 import org.springframework.data.repository.CrudRepository;
 

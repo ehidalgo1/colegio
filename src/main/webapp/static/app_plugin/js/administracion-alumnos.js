@@ -1,12 +1,14 @@
 
 $(document).ready(function(){
     $('#preloader').prop('hidden',true);
+
+    llenarTablaAlumnos();
 });
 
 $('#btn-agregar-alumno').click(function(){
 
     llenarSelectCurso();
-    $('#modal-agregar-alumno').modal().show();
+    $('#modal-agregar-alumno').modal('show');
 
 });
 
@@ -44,28 +46,53 @@ function llenarSelectCurso(){
     });
 };
 
-// function llenarTablaAlumnos(){
+function llenarTablaAlumnos(){
 
-//     $.ajax({
-//         url: ''
-//     });
+    $.ajax({
+        url: '/obtener-alumnos',
+        type: 'get',
+        beforeSend: function(){
 
-// };
+        },
+        success: function(request){
+            var respuesta = JSON.stringify(request);
+            var objeto = JSON.parse(respuesta);
+
+            var lista = "";
+
+            $('#tabla-alumnos').empty();
+
+            for (let i = 0; i < objeto.length; i++) {
+                
+                lista = "<tr><td>"+objeto[i].nombre+"</td><td>"+objeto[i].apellidoP+"</td><td>"+objeto[i].curso.numeroCurso+"</td><tr>"
+                
+                $('#tabla-alumnos').prepend(lista);
+
+            }
+
+        },
+        error: function(){
+
+        },
+        complete: function(){
+
+        }
+    });
+
+};
 
 
 $('.form-agregar-alumno').submit(function(event){
     event.preventDefault();
 
-    var p_nombre = $('#p_nombre').val();
-    var s_nombre = $('#s_nombre').val();
+    var nombre = $('#nombre').val();
     var apellido_p = $('#apellido_p').val();
     var apellido_m = $('#apellido_m').val();
     var token_curso = $('#lista-curso').val();
 
     formData = new FormData();
 
-    formData.append('p_nombre',p_nombre);
-    formData.append('s_nombre',s_nombre);
+    formData.append('nombre',nombre);
     formData.append('apellido_p',apellido_p);
     formData.append('apellido_m',apellido_m);
     formData.append('token_curso',token_curso);
@@ -81,7 +108,8 @@ $('.form-agregar-alumno').submit(function(event){
         },
         success: function(request){
             
-            $('#modal-agregar-alumno').modal().hide();
+            llenarTablaAlumnos();
+            $('#modal-agregar-alumno').modal('hide');
             
 
         },
@@ -89,7 +117,10 @@ $('.form-agregar-alumno').submit(function(event){
             console.log('error de ingreso')
         },
         complete: function(){
-
+            $('#nombre').val('');
+            $('#apellido_p').val('');
+            $('#apellido_m').val('');
+            $('#lista-curso').val('');
         },
         processData: false,
         contentType: false,

@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="preloader" hidden="false"></div>
-    <div class="container">
+    <div class="container mt-5 pt-4">
       <div class="card">
         <div class="card-header">
           <h3>Administración alumnos</h3>
@@ -18,8 +18,7 @@
           <button class="btn btn-primary" id="btn-agregar-alumno">
             Agregar alumno
           </button>
-          <hr class="my-2">
-          <table class="table table-hover">
+          <table class="table table-hover mt-4">
               <thead>
                   <tr>
                       <th>NOMBRE</th>
@@ -42,27 +41,20 @@
       aria-labelledby="modal-agregar-alumno"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h4>Agregar alumno</h4>
           </div>
           <form action="" method="post" id="form-agregar-alumno" class="form-agregar-alumno">
           <div class="modal-body">
-              <div class="form mr-5 ml-5 pr-5 pl-5">
-                  
+              <div class="form p-4">
                       <div class="form-group row">
                           <label for="p_nombre" class="col-md-3">Nombre</label>
                           <div class="col-md-7">
-                            <input type="text" name="p_nombre" id="p_nombre" class="form-control" placeholder="Primer nombre">
+                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Primer nombre">
                           </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="s_nombre" class="col-md-3">S Nombre</label>
-                        <div class="col-md-7">
-                          <input type="text" name="s_nombre" id="s_nombre" class="form-control" placeholder="Segundo nombre">
-                        </div>
-                    </div>
                       <div class="form-group row">
                         <label for="apellido_p" class="col-md-3">Apellido P</label>
                         <div class="col-md-7">
@@ -91,6 +83,7 @@
           </div>
         </div>
       </div>
+      <!--end modal agregar-->
     </div>
     <script src="static/js/jquery-3.4.1.min.js"></script>
     <script

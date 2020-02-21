@@ -5,16 +5,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.colegio.DAO.interfaces.ICursoDAO;
+import com.colegio.DAO.interfaces.IProfesorDAO;
 
 @Transactional
 @Repository
-public class CursoDAO {
+public class ProfesorDAO {
 
 	@Autowired
-	private ICursoDAO crud;
+	private IProfesorDAO crud;
 	
-	public ICursoDAO crud() {
+	public IProfesorDAO crud() {
 		return this.crud;
 	}
+	
 }

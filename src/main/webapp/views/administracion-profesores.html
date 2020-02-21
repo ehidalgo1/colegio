@@ -10,56 +10,91 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mt-5 pt-4">
         <div class="card">
             <div class="card-header">
                 <h4>Administración profesores</h4>
             </div>
             <div class="card-body">
                 <button class="btn btn-primary" id="btn-agregar-profesor">Agregar profesor</button>
-                <hr class="my-2">
+                <table class="table table-hover mt-4">
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO</th>
+                            <th>ESPECIALIDAD</th>
+                            <th>USUARIO</th>
+                            <th>CONTRASEÑA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-profesor">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="modal-dialog modal-lg modal-dialog-centered" id="modal-agregar-profesor">
+    <!--modal agregar alumno-->
+    <div
+      id="modal-agregar-profesor"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal-agregar-profesor"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5>Agregar profesor</h5>
-            </div>
-            <form action="" method="post">
-                <div class="modal-body">
-                    <div class="form">
-                        <div class="form-group row">
-                            <label for="" class="col-md-3"></label>
-                            <div class="col-md-7">
-                                <input type="text" name="nombre" id="nombre" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-3"></label>
-                            <div class="col-md-7">
-                                <input type="text" name="apellido" id="apellido" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-3"></label>
-                            <div class="col-md-7">
-                                <input type="email" name="usuario" id="usuario" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-3"></label>
-                            <div class="col-md-7">
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
+          <div class="modal-header">
+            <h4>Agregar profesor</h4>
+          </div>
+          <form action="" method="post" id="form-agregar-profesor" class="form-agregar-profesor">
+          <div class="modal-body">
+              <div class="form p-4">
+                      <div class="form-group row">
+                          <label for="nombre" class="col-md-3">Nombre</label>
+                          <div class="col-md-7">
+                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Primer nombre">
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="apellido" class="col-md-3">Apellido</label>
+                        <div class="col-md-7">
+                          <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Primer apellido">
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Agregar" class="btn btn-success">
+                    <div class="form-group row">
+                        <label for="especialidad" class="col-md-3">Especialidad</label>
+                        <div class="col-md-7">
+                            <select name="especialidad" id="especialidad" class="form-control">
+                                <option value="MATEMATICAS">MATEMATICAS</option>
+                                <option value="LENGUAJE">LENGUAJE</option>
+                                <option value="HISTORIA">HISTORIA</option>
+                                <option value="INGLES">INGLES</option>
+                                <option value="ED. FISICA">ED. FISICA</option>
+                                <option value="CIENCIAS NATURALES">CIENCIAS NATURALES</option>
+                                <option value="ARTES VISUALES">ARTES VISUALES</option>
+                                <option value="TECNOLOGIA">TECNOLOGIA</option>
+                                <option value="COMPUTACION">COMPUTACION</option>
+                                <option value="MUSICA">MUSICA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="usuario" class="col-md-3">Usuario</label>
+                        <div class="col-md-7">
+                          <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@correo.cl">
+                        </div>
+                    </div>
+              </div>
+          </div>
+          <div class="modal-footer text-rigth">
+              <button class="btn btn-success" id="btn-form-agregar-alumno">Agregar</button>
             </form>
+          </div>
         </div>
-    </div>
+      </div>
+      <!--end modal agregar-->
     </div>
     <script src="static/js/jquery-3.4.1.min.js"></script>
     <script
