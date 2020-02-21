@@ -10,13 +10,25 @@
 </head>
 <body>
     <div th:replace="fragments/topnav :: navbar"></div>
-    <div class="container">
+    <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h4>Dashboard</h4>
+                <h4>Mis alumnos</h4>
             </div>
             <div class="card-body">
-                
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO PATERNO</th>
+                            <th>APELLIDO MATERNO</th>
+                            <th>OPCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-mis-alumnos">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

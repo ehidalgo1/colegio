@@ -2,7 +2,7 @@ package com.colegio.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.util.List;
 
 
 /**
@@ -21,17 +21,30 @@ public class Curso implements Serializable {
 	@Column(name="NUMERO_CURSO")
 	private String numeroCurso;
 
-	@Column(name="PROFESOR_ID_PROFESOR")
-	private BigInteger profesorIdProfesor;
-
 	private String token;
 
-	//uni-directional one-to-one association to Profesor
-	@OneToOne
-	@JoinColumn(name="ID_CURSO")
-	private Profesor profesor;
+	//uni-directional many-to-many association to Ramo
+	@ManyToMany
+	@JoinTable(
+		name="curso_ramo"
+		, joinColumns={
+			@JoinColumn(name="CURSO_ID_CURSO")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="RAMO_ID_RAMO")
+			}
+		)
+	private List<Ramo> ramos;
 
 	public Curso() {
+	}
+
+	public Curso(Long idCurso, String numeroCurso, String token, List<Ramo> ramos) {
+		super();
+		this.idCurso = idCurso;
+		this.numeroCurso = numeroCurso;
+		this.token = token;
+		this.ramos = ramos;
 	}
 
 	public Long getIdCurso() {
@@ -50,14 +63,6 @@ public class Curso implements Serializable {
 		this.numeroCurso = numeroCurso;
 	}
 
-	public BigInteger getProfesorIdProfesor() {
-		return this.profesorIdProfesor;
-	}
-
-	public void setProfesorIdProfesor(BigInteger profesorIdProfesor) {
-		this.profesorIdProfesor = profesorIdProfesor;
-	}
-
 	public String getToken() {
 		return this.token;
 	}
@@ -66,12 +71,12 @@ public class Curso implements Serializable {
 		this.token = token;
 	}
 
-	public Profesor getProfesor() {
-		return this.profesor;
+	public List<Ramo> getRamos() {
+		return this.ramos;
 	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+	public void setRamos(List<Ramo> ramos) {
+		this.ramos = ramos;
 	}
 
 }

@@ -2,7 +2,6 @@ package com.colegio.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -32,31 +31,17 @@ public class Alumno implements Serializable {
 	@ManyToOne
 	private Curso curso;
 
-	//uni-directional many-to-many association to Ramo
-	@ManyToMany
-	@JoinTable(
-		name="alumno_ramo"
-		, joinColumns={
-			@JoinColumn(name="ALUMNO_ID_ALUMNO")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="RAMO_ID_RAMO")
-			}
-		)
-	private List<Ramo> ramos;
-
 	public Alumno() {
 	}
 
-	public Alumno(Long idAlumno, String apellidoM, String apellidoP, String nombre, String token, Curso curso,
-			List<Ramo> ramos) {
+	public Alumno(Long idAlumno, String apellidoM, String apellidoP, String nombre, String token, Curso curso) {
+		super();
 		this.idAlumno = idAlumno;
 		this.apellidoM = apellidoM;
 		this.apellidoP = apellidoP;
 		this.nombre = nombre;
 		this.token = token;
 		this.curso = curso;
-		this.ramos = ramos;
 	}
 
 	public Long getIdAlumno() {
@@ -105,14 +90,6 @@ public class Alumno implements Serializable {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
-	}
-
-	public List<Ramo> getRamos() {
-		return this.ramos;
-	}
-
-	public void setRamos(List<Ramo> ramos) {
-		this.ramos = ramos;
 	}
 
 }

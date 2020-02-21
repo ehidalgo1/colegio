@@ -12,8 +12,12 @@ import com.colegio.DAO.CursoDAO;
 import com.colegio.DAO.FuncionesDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Curso;
+import com.colegio.entity.Profesor;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 
 @Controller
@@ -29,17 +33,25 @@ public class AdminAlumnosController {
 	private FuncionesDAO funDAO;
 
 	@GetMapping("/administracion-alumnos")
-	public String goAdminAlumnos() {
+	public String goAdminAlumnos(HttpSession session) {
 		String pagina = "";
 
 		try {
 
-			pagina = "administracion-alumnos";
+			Profesor profeSession = (Profesor) session.getAttribute("usuario");
+			
+			if (profeSession != null) {
+				
+				pagina = "administracion-alumnos";
+			}else {
+				pagina = "redirect:login";
+			}
+			
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			pagina = "login";
+			pagina = "redirect:login";
 		}
 
 		return pagina;
@@ -102,7 +114,7 @@ public class AdminAlumnosController {
 
 					Long idAlumno = (long) 0;
 
-					alumno = new Alumno(idAlumno, apellidoM, apellidoP, nombre, funDAO.funcionToken(), cursoFind, null);
+					alumno = new Alumno(idAlumno, apellidoM, apellidoP, nombre, funDAO.funcionToken(), cursoFind);
 
 					alumnoDAO.crud().save(alumno);
 
