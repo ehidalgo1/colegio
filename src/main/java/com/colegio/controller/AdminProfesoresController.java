@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,6 @@ import com.colegio.DAO.CursoDAO;
 import com.colegio.DAO.FuncionesDAO;
 import com.colegio.DAO.ProfesorDAO;
 import com.colegio.DAO.RamoDAO;
-import com.colegio.DAO.interfaces.IRamoDAO;
 import com.colegio.entity.Curso;
 import com.colegio.entity.Profesor;
 import com.colegio.entity.Ramo;
@@ -38,19 +38,33 @@ public class AdminProfesoresController {
 	private CursoDAO cursoDAO;
 
 	@GetMapping("/administracion-profesores")
-	public String goAdminProfesores(HttpSession session) {
+	public String goAdminProfesores(HttpSession session, Model model) {
 		
 		String pagina = "";
+		Profesor profe = null;
 		
-		Profesor profeSession = (Profesor) session.getAttribute("usuario");
-		
-		if (profeSession != null) {
+		try {
 			
-			pagina = "administracion-profesores";
-		}else {
+			Profesor profeSession = (Profesor) session.getAttribute("usuario");
+			
+			if (profeSession != null) {
+				
+				profe = (Profesor) session.getAttribute("usuario");
+
+				model.addAttribute("profesor", profe);
+				
+				pagina = "administracion-profesores";
+				
+				
+			}else {
+				pagina = "redirect:login";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 			pagina = "redirect:login";
 		}
-		
 		
 		return pagina;
 	}

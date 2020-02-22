@@ -1,19 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Contexto para URL -->
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<!-- End Contexto -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administracion profesores</title>
+    <title>Administración profesores</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="static/app_plugin/css/estilo.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container mt-5 pt-4">
+<c:import url="menu.jsp"></c:import>
+    <div class="container">
         <div class="card">
             <div class="card-header">
-                <h4>AdministraciÃ³n profesores</h4>
+                <h4>Administración profesores</h4>
             </div>
             <div class="card-body">
                 <button class="btn btn-primary" id="btn-agregar-profesor">Agregar profesor</button>
@@ -24,7 +30,7 @@
                             <th>APELLIDO</th>
                             <th>ESPECIALIDAD</th>
                             <th>USUARIO</th>
-                            <th>CONTRASEÃ‘A</th>
+                            <th>CONTRASEÑ‘A</th>
                             <th>CURSO</th>
                         </tr>
                     </thead>

@@ -8,7 +8,7 @@ $('.form-login').submit(function () {
 
     fd = new FormData();
 
-    fd.append('usuario', usuario);
+    fd.append('usuario', usuario.toUpperCase());
     fd.append('password', password);
 
     $.ajax({
@@ -22,7 +22,7 @@ $('.form-login').submit(function () {
 
             if (request === 200) {
                 var url = "/home";
-                $(location).attr('href', url);
+                window.location.replace(url);
             }
 
 

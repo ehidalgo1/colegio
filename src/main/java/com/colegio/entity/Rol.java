@@ -15,7 +15,7 @@ public class Rol implements Serializable {
 
 	@Id
 	@Column(name="ID_ROL")
-	private Long idRol;
+	private long idRol;
 
 	@Column(name="NOMBRE_ROL")
 	private String nombreRol;
@@ -25,17 +25,18 @@ public class Rol implements Serializable {
 	public Rol() {
 	}
 
-	public Rol(Long idRol, String nombreRol, String token) {
+	public Rol(long idRol, String nombreRol, String token) {
+		super();
 		this.idRol = idRol;
 		this.nombreRol = nombreRol;
 		this.token = token;
 	}
 
-	public Long getIdRol() {
+	public long getIdRol() {
 		return this.idRol;
 	}
 
-	public void setIdRol(Long idRol) {
+	public void setIdRol(long idRol) {
 		this.idRol = idRol;
 	}
 

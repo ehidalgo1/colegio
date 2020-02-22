@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-02-2020 a las 04:04:30
+-- Tiempo de generación: 22-02-2020 a las 20:11:09
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -61,10 +61,9 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`ID_ALUMNO`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(2, 'eugenio', 'sdfsfds', 'fssdffsd', 'f4e4a9d8-ec27-1dba-d9e0-bff93a0e5d67', 17),
-(3, 'alan', 'parrish', 'segovia', '7ee59bf2-7edf-6e19-f6d9-8c3669c13d2f', 14),
-(4, 'ricardo', 'hidalgo', 'diaz', '0273f123-e4b2-d24e-d05d-c7bbd31d6603', 15),
-(5, 'cualquiera', 'salas', 'mario', '0ac6c092-a7bc-fa59-d97d-c26fff353f0c', 7);
+(1, 'EUGENIO', 'HIDALGO', 'DIAZ', 'SFDSFSDFSsdsdfsfs', 1),
+(2, 'RICARDO', 'HIDALGO', 'DIAZ', 'asdaASAASDasdadadafdsdfgdgf', 2),
+(8, 'FRANCISCA', 'VALENZUELA', 'GALVEZ', 'a5f83a61-f066-7ee9-ae2e-d0d0966a1c9e', 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +126,43 @@ CREATE TABLE `curso_ramo` (
   `RAMO_ID_RAMO` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `curso_ramo`
+--
+
+INSERT INTO `curso_ramo` (`CURSO_ID_CURSO`, `RAMO_ID_RAMO`) VALUES
+(1, 10),
+(1, 15),
+(1, 9),
+(1, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nota`
+--
+
+CREATE TABLE `nota` (
+  `ID_NOTA` bigint(20) NOT NULL,
+  `RAMO_ID_RAMO` bigint(20) NOT NULL,
+  `ALUMNO_ID_ALUMNO` bigint(20) NOT NULL,
+  `NOTA_1` double NOT NULL,
+  `NOTA_2` double NOT NULL,
+  `NOTA_3` double NOT NULL,
+  `NOTA_4` double NOT NULL,
+  `NOTA_5` double NOT NULL,
+  `NOTA_6` double NOT NULL,
+  `NOTA_7` double NOT NULL,
+  `NOTA_8` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `nota`
+--
+
+INSERT INTO `nota` (`ID_NOTA`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
+(1, 10, 1, 7, 6.5, 0, 0, 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -149,8 +185,8 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`ID_PROFESOR`, `NOMBRE`, `APELLIDO`, `ESPECIALIDAD`, `USUARIO`, `PASSWORD`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(2, 'marco', 'sepulveda', 'MATEMATICAS', 'msepulveda@colegio.cl', 'colegio123', '64002c09-88ce-16b9-5fa1-1e82c8790f94', 0),
-(3, 'sdfsfsfd', 'sdfsdfsd', 'ED. FISICA', 'eugeniohidalgo1@gmail.com', 'colegio123', '09432545-0bbb-1749-0539-b303abfe5249', 0);
+(1, 'FELIPE', 'FARIÑA', 'MATEMATICAS', 'FFARINA@COLEGIO.CL', 'colegio123', 'sfdeewrfergerregegre', 1),
+(4, 'GABRIEL', 'GOMEZ', 'HISTORIA', 'GGOMEZ@COLEGIO.CL', 'colegio123', 'dd6b281b-a858-8b11-04a2-38cbf524d8fb', 2);
 
 -- --------------------------------------------------------
 
@@ -172,14 +208,6 @@ CREATE TABLE `profesor_rol` (
 CREATE TABLE `ramo` (
   `ID_RAMO` bigint(20) NOT NULL,
   `NOMBRE` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `NOTA_1` double NOT NULL,
-  `NOTA_2` double NOT NULL,
-  `NOTA_3` double NOT NULL,
-  `NOTA_4` double NOT NULL,
-  `NOTA_5` double NOT NULL,
-  `NOTA_6` double NOT NULL,
-  `NOTA_7` double NOT NULL,
-  `NOTA_8` double NOT NULL,
   `TOKEN` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -187,22 +215,22 @@ CREATE TABLE `ramo` (
 -- Volcado de datos para la tabla `ramo`
 --
 
-INSERT INTO `ramo` (`ID_RAMO`, `NOMBRE`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`, `TOKEN`) VALUES
-(1, 'MATEMATICAS', 0, 0, 0, 0, 0, 0, 0, 0, '53483cff-9bd0-8920-3c87-383ea2851322'),
-(2, 'LENGUAJE', 0, 0, 0, 0, 0, 0, 0, 0, '870cb91d-8860-5369-d5fe-2c5b9be93897'),
-(3, 'HISTORIA', 0, 0, 0, 0, 0, 0, 0, 0, '2113d67a-bece-8518-a4d8-3177cb4de04e'),
-(4, 'INGLES', 0, 0, 0, 0, 0, 0, 0, 0, '18e4a209-a09a-3e93-6c90-6c2a861c9468'),
-(5, 'CIENCIAS SOCIALES', 0, 0, 0, 0, 0, 0, 0, 0, '6e216c8a-5f68-9bb0-690a-fd1ce7e55c01'),
-(6, 'MUSICA', 0, 0, 0, 0, 0, 0, 0, 0, '99e56f6f-b161-9a75-4f77-a5638c584b35'),
-(7, 'ED. FISICA', 0, 0, 0, 0, 0, 0, 0, 0, '9569e316-6791-f81a-827d-0d499edff59e'),
-(8, 'RELIGION', 0, 0, 0, 0, 0, 0, 0, 0, 'd8183eef-0bf2-30c3-8e5f-292d5ea24488'),
-(9, 'CIENCIAS NATURALES', 0, 0, 0, 0, 0, 0, 0, 0, '6838c962-81ee-2a2d-be90-a4f9c480a48a'),
-(10, 'ARTES VISUALES', 0, 0, 0, 0, 0, 0, 0, 0, '596d6864-fc97-b79f-ba95-dc76a3441910'),
-(11, 'TECNOLOGIA', 0, 0, 0, 0, 0, 0, 0, 0, '5ebc503d-d808-98b7-60e4-0d78923480bd'),
-(12, 'COMPUTACION', 0, 0, 0, 0, 0, 0, 0, 0, 'd562103f-8a7d-8b51-88eb-40b5b086da29'),
-(13, 'FISICA', 0, 0, 0, 0, 0, 0, 0, 0, '7a5b717e-77f8-f484-7ad4-3a5903efd5a5'),
-(14, 'QUIMICA', 0, 0, 0, 0, 0, 0, 0, 0, '36d9d9f1-107f-09c5-c919-8e72605fd0b0'),
-(15, 'BIOLOGIA', 0, 0, 0, 0, 0, 0, 0, 0, '60a3f96d-271c-7f13-8da3-b97910d38992');
+INSERT INTO `ramo` (`ID_RAMO`, `NOMBRE`, `TOKEN`) VALUES
+(1, 'MATEMATICAS', '53483cff-9bd0-8920-3c87-383ea2851322'),
+(2, 'LENGUAJE', '870cb91d-8860-5369-d5fe-2c5b9be93897'),
+(3, 'HISTORIA', '2113d67a-bece-8518-a4d8-3177cb4de04e'),
+(4, 'INGLES', '18e4a209-a09a-3e93-6c90-6c2a861c9468'),
+(5, 'CIENCIAS SOCIALES', '6e216c8a-5f68-9bb0-690a-fd1ce7e55c01'),
+(6, 'MUSICA', '99e56f6f-b161-9a75-4f77-a5638c584b35'),
+(7, 'ED. FISICA', '9569e316-6791-f81a-827d-0d499edff59e'),
+(8, 'RELIGION', 'd8183eef-0bf2-30c3-8e5f-292d5ea24488'),
+(9, 'CIENCIAS NATURALES', '6838c962-81ee-2a2d-be90-a4f9c480a48a'),
+(10, 'ARTES VISUALES', '596d6864-fc97-b79f-ba95-dc76a3441910'),
+(11, 'TECNOLOGIA', '5ebc503d-d808-98b7-60e4-0d78923480bd'),
+(12, 'COMPUTACION', 'd562103f-8a7d-8b51-88eb-40b5b086da29'),
+(13, 'FISICA', '7a5b717e-77f8-f484-7ad4-3a5903efd5a5'),
+(14, 'QUIMICA', '36d9d9f1-107f-09c5-c919-8e72605fd0b0'),
+(15, 'BIOLOGIA', '60a3f96d-271c-7f13-8da3-b97910d38992');
 
 -- --------------------------------------------------------
 
@@ -241,6 +269,14 @@ ALTER TABLE `curso_ramo`
   ADD KEY `RAMO_ID_RAMO` (`RAMO_ID_RAMO`);
 
 --
+-- Indices de la tabla `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`ID_NOTA`),
+  ADD KEY `RAMO_ID_RAMO` (`RAMO_ID_RAMO`),
+  ADD KEY `ALUMNO_ID_ALUMNO` (`ALUMNO_ID_ALUMNO`);
+
+--
 -- Indices de la tabla `profesor`
 --
 ALTER TABLE `profesor`
@@ -274,7 +310,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -283,10 +319,16 @@ ALTER TABLE `curso`
   MODIFY `ID_CURSO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT de la tabla `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ramo`
@@ -305,11 +347,30 @@ ALTER TABLE `rol`
 --
 
 --
+-- Filtros para la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`CURSO_ID_CURSO`) REFERENCES `curso` (`ID_CURSO`);
+
+--
 -- Filtros para la tabla `curso_ramo`
 --
 ALTER TABLE `curso_ramo`
   ADD CONSTRAINT `curso_ramo_ibfk_1` FOREIGN KEY (`CURSO_ID_CURSO`) REFERENCES `curso` (`ID_CURSO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `curso_ramo_ibfk_2` FOREIGN KEY (`RAMO_ID_RAMO`) REFERENCES `ramo` (`ID_RAMO`);
+
+--
+-- Filtros para la tabla `nota`
+--
+ALTER TABLE `nota`
+  ADD CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`RAMO_ID_RAMO`) REFERENCES `ramo` (`ID_RAMO`),
+  ADD CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`);
+
+--
+-- Filtros para la tabla `profesor`
+--
+ALTER TABLE `profesor`
+  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`CURSO_ID_CURSO`) REFERENCES `curso` (`ID_CURSO`);
 
 --
 -- Filtros para la tabla `profesor_rol`

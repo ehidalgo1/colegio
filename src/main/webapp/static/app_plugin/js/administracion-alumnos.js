@@ -92,9 +92,9 @@ $('.form-agregar-alumno').submit(function(event){
 
     formData = new FormData();
 
-    formData.append('nombre',nombre);
-    formData.append('apellido_p',apellido_p);
-    formData.append('apellido_m',apellido_m);
+    formData.append('nombre',nombre.toUpperCase());
+    formData.append('apellido_p',apellido_p.toUpperCase());
+    formData.append('apellido_m',apellido_m.toUpperCase());
     formData.append('token_curso',token_curso);
 
     console.log('enviando datos')

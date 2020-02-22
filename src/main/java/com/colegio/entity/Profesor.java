@@ -52,7 +52,7 @@ public class Profesor implements Serializable {
 
 	public Profesor(Long idProfesor, String apellido, String especialidad, String nombre, String password, String token,
 			String usuario, Curso curso, List<Rol> rols) {
-
+		super();
 		this.idProfesor = idProfesor;
 		this.apellido = apellido;
 		this.especialidad = especialidad;

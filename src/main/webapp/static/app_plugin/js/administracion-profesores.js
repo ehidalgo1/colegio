@@ -128,10 +128,10 @@ $('#form-agregar-profesor').submit(function (event) {
     var tokenCurso = $('#curso').val();
 
     var profesor = {
-        'nombre': nombre,
-        'apellido': apellido,
-        'especialidad': especialidad,
-        'usuario': usuario,
+        'nombre': nombre.toUpperCase(),
+        'apellido': apellido.toUpperCase(),
+        'especialidad': especialidad.toUpperCase(),
+        'usuario': usuario.toUpperCase(),
         'password': password,
         'curso': {
             'token': tokenCurso

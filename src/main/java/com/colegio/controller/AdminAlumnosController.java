@@ -2,6 +2,7 @@ package com.colegio.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +34,9 @@ public class AdminAlumnosController {
 	private FuncionesDAO funDAO;
 
 	@GetMapping("/administracion-alumnos")
-	public String goAdminAlumnos(HttpSession session) {
+	public String goAdminAlumnos(HttpSession session,Model model) {
 		String pagina = "";
+		Profesor profe = null;
 
 		try {
 
@@ -42,7 +44,13 @@ public class AdminAlumnosController {
 			
 			if (profeSession != null) {
 				
+				profe = (Profesor) session.getAttribute("usuario");
+
+				model.addAttribute("profesor", profe);
+				
 				pagina = "administracion-alumnos";
+				
+				
 			}else {
 				pagina = "redirect:login";
 			}
@@ -114,7 +122,7 @@ public class AdminAlumnosController {
 
 					Long idAlumno = (long) 0;
 
-					alumno = new Alumno(idAlumno, apellidoM, apellidoP, nombre, funDAO.funcionToken(), cursoFind);
+					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(), nombre.toUpperCase(), funDAO.funcionToken(), cursoFind);
 
 					alumnoDAO.crud().save(alumno);
 

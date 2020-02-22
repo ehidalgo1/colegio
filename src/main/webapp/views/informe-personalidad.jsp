@@ -1,5 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Contexto para URL -->
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<!-- End Contexto -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
@@ -9,7 +14,7 @@
     <title>Inicio</title>
 </head>
 <body>
-    <div th:replace="fragments/topnav :: navbar"></div>
+<c:import url="menu.jsp"></c:import>
     <div class="container">
         <div class="card">
             <div class="card-header">

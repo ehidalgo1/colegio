@@ -1,18 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Contexto para URL -->
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<!-- End Contexto -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>administracion alumnos</title>
+    <title>administración alumnos</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="static/app_plugin/css/estilo.css" rel="stylesheet" />
   </head>
   <body>
+  <c:import url="menu.jsp"></c:import>
     <div class="preloader" hidden="false"></div>
-    <div class="container mt-5 pt-4">
+    <div class="container">
       <div class="card">
         <div class="card-header">
-          <h3>AdministraciÃ³n alumnos</h3>
+          <h4>Administración alumnos</h4>
         </div>
         <div class="card-body">
           <button class="btn btn-primary" id="btn-agregar-alumno">
