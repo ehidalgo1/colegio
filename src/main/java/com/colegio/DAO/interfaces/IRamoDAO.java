@@ -6,4 +6,7 @@ import com.colegio.entity.Ramo;
 
 public interface IRamoDAO extends CrudRepository<Ramo, Long>{
 
+	Ramo findByNombre(String nombre);
+	
+	
 }

@@ -17,7 +17,7 @@
     <div class="contenedor-login">
       <div class="card shadow pt-3 pb-3 rounded-lg">
         <div class="card-body">
-          <h4 class="card-title mb-3 text-center">Iniciar SesiÃ³n</h4>
+          <h4 class="card-title mb-3 text-center">Iniciar Sesión</h4>
           <div class="form">
             <form action="/home" method="post" class="form-login">
               <div class="row">
