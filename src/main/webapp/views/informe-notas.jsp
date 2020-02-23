@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Contexto para URL -->
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!-- End Contexto -->
 <!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
@@ -29,9 +30,11 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12">
-					<h6>Alumno: ${alumno.nombre} ${alumno.apellidoP} ${alumno.apellidoM}</h6>
-					<h6>Curso: ${alumno.curso.numeroCurso}</h6>
-					<input id="token-alumno" type="text" value="${alumno.token}" hidden="true" readonly="readonly">
+						<h6>Alumno: ${alumno.nombre} ${alumno.apellidoP}
+							${alumno.apellidoM}</h6>
+						<h6>Curso: ${alumno.curso.numeroCurso}</h6>
+						<input id="token-alumno" type="text" value="${alumno.token}"
+							hidden="true" readonly="readonly">
 						<button class="btn btn-primary mt-3">Agregar nota</button>
 						<table class="table table-hover mt-3">
 							<thead>
@@ -45,14 +48,16 @@
 									<th>NOTA 6</th>
 									<th>NOTA 7</th>
 									<th>NOTA 8</th>
-									<th>PROMEDIO FINAL</th>
+									<th>PROMEDIO</th>
 									<th>OPCIONES</th>
 								</tr>
 							</thead>
 							<tbody id="tabla-notas">
+								<c:set var="contador" value="${0}" />
 								<c:set var="total" value="${0}" />
+								<c:set var="promedio" value="${0}" />
 								<c:forEach items="${listanotas}" var="item">
-									<tr>
+									<tr id="fila-${contador}">
 										<td>${item.ramo.nombre}</td>
 										<td>${item.nota1}</td>
 										<td>${item.nota2}</td>
@@ -64,10 +69,42 @@
 										<td>${item.nota8}</td>
 										<c:set var="total"
 											value="${ (total + item.nota1 + item.nota2 + item.nota3 + item.nota4 + item.nota5 + item.nota6 + item.nota7 + item.nota8 ) /8 }" />
-										<td><fmt:formatNumber value="${total}" maxFractionDigits="1" /></td>
-										<td><button id="btn-editar-nota" class="btn btn-secondary btn-sm rounded-circle">+</button><button hidden="true"  id="btn-guardar-notas" class="btn btn-success btn-sm rounded-circle">Ok</button></td>
+										<c:set var="promedio" value="${promedio + total}" />
+
+										<c:choose>
+											<c:when test="${total>1}">
+												<td><fmt:formatNumber value="${total}"
+														maxFractionDigits="1" /></td>
+											</c:when>
+											<c:otherwise>
+												<td>0</td>
+											</c:otherwise>
+										</c:choose>
+
+										<td><button id="btn-editar-nota-${contador}"
+												class="btn btn-secondary btn-sm rounded-circle"
+												onclick="editarNotas(${contador})">+</button>
+											<button hidden="true" id="btn-guardar-notas-${contador}"
+												onclick="guardarNotas(${contador})"
+												class="btn btn-success btn-sm rounded-circle">Ok</button></td>
 									</tr>
+									<c:set var="contador" value="${contador +1 }" />
 								</c:forEach>
+								<tr>
+									<th>PROMEDIO FINAL</th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<c:set var="promedio" value="${promedio / contador}" />
+									<th><fmt:formatNumber value="${promedio}"
+												maxFractionDigits="1" /></th>
+									<th></th>
+								</tr>
 							</tbody>
 						</table>
 					</div>

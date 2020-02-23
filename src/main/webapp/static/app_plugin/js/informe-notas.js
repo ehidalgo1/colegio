@@ -2,41 +2,43 @@ $(document).ready(function() {
 
 });
 
-$("#btn-editar-nota").click(function() {
 
-    $(this).attr('hidden',true);
 
-  var input = "";
-  var nota = 0;
+function editarNotas(i){
 
-  $("tr td").each(function(i, item) {
+    $('#btn-editar-nota-'+i).attr('hidden',true);
+    $('.btn-secondary').each(function(i,item){
+      $(this).attr('disabled', true);
+    });
 
-    if (i > 0 && i < 9) {
+    $('#fila-'+i+' td').each(function(i,item){
+        
+        if (i > 0 && i < 9) {
 
-      nota = item.textContent;
-
-      input = "<input id='nota-"+i+"' type='text' class='form-control' />";
+            nota = item.textContent;
       
+            input = "<input id='nota-"+i+"' type='text' class='form-control' />";
+            
+      
+            $(this).html(input);
+      
+            $("#nota-"+i+"").val(nota);
+      
+          }
 
-      $(this).html(input);
+    });
 
-      $("#nota-"+i+"").val(nota);
+    $('#btn-guardar-notas-'+i).prop('hidden',false);
 
-    }
 
-  });
+};
 
-  $('#btn-guardar-notas').prop('hidden',false);
-
-});
-
-$('#btn-guardar-notas').click(function(){
-
+function guardarNotas(i){
 
     var lista = [];
     var valorCelda = "";
 
-    $("tr td").each(function(i, item) {
+    $('#fila-'+i+' td').each(function(i,item){
 
         if(i===0){
 
@@ -85,4 +87,4 @@ $('#btn-guardar-notas').click(function(){
           }
       });
 
-});
+};

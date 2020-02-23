@@ -7,5 +7,6 @@
 		<class>com.colegio.entity.Profesor</class>
 		<class>com.colegio.entity.Ramo</class>
 		<class>com.colegio.entity.Rol</class>
+		<class>com.colegio.entity.Personalidad</class>
 	</persistence-unit>
 </persistence>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-02-2020 a las 20:11:09
+-- Tiempo de generación: 23-02-2020 a las 20:34:46
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -23,6 +23,13 @@ SET time_zone = "+00:00";
 --
 
 DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTAR_RAMOS_CURSO` (IN `NUMERO_CURSO` VARCHAR(255) CHARSET utf8)  READS SQL DATA
+    SQL SECURITY INVOKER
+SELECT * from curso WHERE NUMERO_CURSO = @NUMERO_CURSO$$
+
 --
 -- Funciones
 --
@@ -63,7 +70,8 @@ CREATE TABLE `alumno` (
 INSERT INTO `alumno` (`ID_ALUMNO`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
 (1, 'EUGENIO', 'HIDALGO', 'DIAZ', 'SFDSFSDFSsdsdfsfs', 1),
 (2, 'RICARDO', 'HIDALGO', 'DIAZ', 'asdaASAASDasdadadafdsdfgdgf', 2),
-(8, 'FRANCISCA', 'VALENZUELA', 'GALVEZ', 'a5f83a61-f066-7ee9-ae2e-d0d0966a1c9e', 1);
+(8, 'FRANCISCA', 'VALENZUELA', 'GALVEZ', 'a5f83a61-f066-7ee9-ae2e-d0d0966a1c9e', 1),
+(11, 'KARLA', 'HIDALGO', 'ZAMORANO', '24c0f16d-7e3e-2c3b-ab7c-fa4d77e36dbe', 7);
 
 -- --------------------------------------------------------
 
@@ -132,9 +140,155 @@ CREATE TABLE `curso_ramo` (
 
 INSERT INTO `curso_ramo` (`CURSO_ID_CURSO`, `RAMO_ID_RAMO`) VALUES
 (1, 10),
-(1, 15),
 (1, 9),
-(1, 7);
+(1, 7),
+(1, 5),
+(1, 3),
+(1, 2),
+(1, 1),
+(1, 4),
+(1, 6),
+(1, 8),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9),
+(2, 10),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4),
+(4, 5),
+(4, 6),
+(4, 7),
+(4, 8),
+(4, 9),
+(4, 10),
+(5, 1),
+(5, 2),
+(5, 3),
+(5, 4),
+(5, 5),
+(5, 6),
+(5, 7),
+(5, 8),
+(5, 9),
+(5, 10),
+(7, 1),
+(7, 2),
+(7, 3),
+(7, 4),
+(7, 5),
+(7, 6),
+(7, 7),
+(7, 8),
+(7, 9),
+(7, 10),
+(8, 1),
+(8, 2),
+(8, 3),
+(8, 4),
+(8, 5),
+(8, 6),
+(8, 7),
+(8, 8),
+(8, 9),
+(8, 10),
+(10, 1),
+(10, 2),
+(10, 3),
+(10, 4),
+(10, 5),
+(10, 6),
+(10, 7),
+(10, 8),
+(10, 9),
+(10, 10),
+(11, 1),
+(11, 2),
+(11, 3),
+(11, 4),
+(11, 5),
+(11, 6),
+(11, 7),
+(11, 8),
+(11, 9),
+(11, 10),
+(13, 1),
+(13, 2),
+(13, 3),
+(13, 4),
+(13, 5),
+(13, 6),
+(13, 7),
+(13, 8),
+(13, 9),
+(13, 10),
+(14, 1),
+(14, 2),
+(14, 3),
+(14, 4),
+(14, 5),
+(14, 6),
+(14, 7),
+(14, 8),
+(14, 9),
+(14, 10),
+(16, 1),
+(16, 2),
+(16, 3),
+(16, 4),
+(16, 5),
+(16, 6),
+(16, 7),
+(16, 8),
+(16, 9),
+(16, 10),
+(17, 1),
+(17, 2),
+(17, 3),
+(17, 4),
+(17, 5),
+(17, 6),
+(17, 7),
+(17, 8),
+(17, 9),
+(17, 10),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 4),
+(19, 5),
+(19, 6),
+(19, 7),
+(19, 8),
+(19, 9),
+(19, 10),
+(20, 1),
+(20, 2),
+(20, 3),
+(20, 4),
+(20, 5),
+(20, 6),
+(20, 7),
+(20, 8),
+(20, 9),
+(20, 10),
+(22, 1),
+(22, 2),
+(22, 3),
+(22, 4),
+(22, 5),
+(22, 6),
+(22, 7),
+(22, 8),
+(22, 9),
+(22, 10);
 
 -- --------------------------------------------------------
 
@@ -161,7 +315,50 @@ CREATE TABLE `nota` (
 --
 
 INSERT INTO `nota` (`ID_NOTA`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
-(1, 10, 1, 7, 6.5, 0, 0, 0, 0, 0, 0);
+(1, 1, 11, 6.5, 7, 6, 6, 6, 6, 0, 0),
+(2, 2, 11, 6, 6.5, 6, 6, 6, 6, 0, 0),
+(3, 3, 11, 7, 6, 6, 6, 6, 6, 7, 7),
+(4, 4, 11, 6.5, 7, 6, 6, 6, 0, 0, 0),
+(5, 5, 11, 6.5, 7, 7, 7, 7, 6, 0, 0),
+(6, 6, 11, 6.6, 6.6, 6, 6, 6, 0, 0, 0),
+(7, 7, 11, 6.7, 6.5, 7, 6, 6, 6, 6, 0),
+(8, 8, 11, 6.8, 7, 7, 7, 6, 0, 0, 0),
+(9, 9, 11, 7, 7, 7, 6, 6, 6, 0, 0),
+(10, 10, 11, 7, 7, 7, 6, 6, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personalidad`
+--
+
+CREATE TABLE `personalidad` (
+  `ID_PERSONALIDAD` bigint(20) NOT NULL,
+  `ALUMNO_ID_ALUMNO` bigint(20) NOT NULL,
+  `HIGIENE_PRESENTACION` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `AUTOESTIMA_VALORACION` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `SUPERA_ERRORES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `TOLERA_FRUSTRACIONES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `CONTROLA_IMPULSOS` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `INTEGRA_GRUPO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `RESUELVE_PROBLEMAS_INTERPERSONALES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `RESPETA_NORMAS_CONVIVENCIA` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `ACTITUD_RESPETUOSA` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `PREOCUPACION_SOLIDARIDAD` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `RESPETA_BIENES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `TRABAJO_CONTINUO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `RESPONSABLE_DEBERES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `PARTICIPA_CLASES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `DEMUESTRA_EMPRENDIMIENTO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `INTERCAMBIA_CONOCIMIENTOS` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `SUPERA_DIFICULTADES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `TRABAJA_CLASES` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `ACATA_NORMAS` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `DISPUESTO_CONCENTRADO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `POSITIVO_PARTICIPATIVO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `OBSERVACIONES_PRIMER_SEMESTRE` text COLLATE utf8_spanish_ci NOT NULL,
+  `OBSERVACIONES_SEGUNDO_SEMESTRE` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -186,7 +383,8 @@ CREATE TABLE `profesor` (
 
 INSERT INTO `profesor` (`ID_PROFESOR`, `NOMBRE`, `APELLIDO`, `ESPECIALIDAD`, `USUARIO`, `PASSWORD`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
 (1, 'FELIPE', 'FARIÑA', 'MATEMATICAS', 'FFARINA@COLEGIO.CL', 'colegio123', 'sfdeewrfergerregegre', 1),
-(4, 'GABRIEL', 'GOMEZ', 'HISTORIA', 'GGOMEZ@COLEGIO.CL', 'colegio123', 'dd6b281b-a858-8b11-04a2-38cbf524d8fb', 2);
+(4, 'GABRIEL', 'GOMEZ', 'HISTORIA', 'GGOMEZ@COLEGIO.CL', 'colegio123', 'dd6b281b-a858-8b11-04a2-38cbf524d8fb', 2),
+(5, 'GABRIELA', 'MISTRAL', 'CIENCIAS', 'GMISTRAL@COLEGIO.CL', 'colegio123', '9aac04cd-788a-8a0a-cf44-24a59eae05f2', 7);
 
 -- --------------------------------------------------------
 
@@ -277,6 +475,13 @@ ALTER TABLE `nota`
   ADD KEY `ALUMNO_ID_ALUMNO` (`ALUMNO_ID_ALUMNO`);
 
 --
+-- Indices de la tabla `personalidad`
+--
+ALTER TABLE `personalidad`
+  ADD PRIMARY KEY (`ID_PERSONALIDAD`),
+  ADD KEY `personalidad_ibfk_1` (`ALUMNO_ID_ALUMNO`);
+
+--
 -- Indices de la tabla `profesor`
 --
 ALTER TABLE `profesor`
@@ -310,7 +515,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -322,13 +527,19 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `personalidad`
+--
+ALTER TABLE `personalidad`
+  MODIFY `ID_PERSONALIDAD` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `ramo`
@@ -365,6 +576,12 @@ ALTER TABLE `curso_ramo`
 ALTER TABLE `nota`
   ADD CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`RAMO_ID_RAMO`) REFERENCES `ramo` (`ID_RAMO`),
   ADD CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`);
+
+--
+-- Filtros para la tabla `personalidad`
+--
+ALTER TABLE `personalidad`
+  ADD CONSTRAINT `personalidad_ibfk_1` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `profesor`

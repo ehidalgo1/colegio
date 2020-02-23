@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.colegio.DAO.AlumnoDAO;
 import com.colegio.DAO.CursoDAO;
 import com.colegio.DAO.FuncionesDAO;
+import com.colegio.DAO.NotaDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Curso;
+import com.colegio.entity.Nota;
 import com.colegio.entity.Profesor;
+import com.colegio.entity.Ramo;
 
 import java.util.List;
 
@@ -32,6 +35,9 @@ public class AdminAlumnosController {
 
 	@Autowired
 	private FuncionesDAO funDAO;
+	
+	@Autowired
+	private NotaDAO notaDAO;
 
 	@GetMapping("/administracion-alumnos")
 	public String goAdminAlumnos(HttpSession session,Model model) {
@@ -109,6 +115,8 @@ public class AdminAlumnosController {
 		Alumno alumnoFind = null;
 		Curso cursoFind = null;
 		Alumno alumno = null;
+		Nota nota = null;
+		List<Nota> listaNotas = null;
 
 		try {
 
@@ -125,7 +133,22 @@ public class AdminAlumnosController {
 					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(), nombre.toUpperCase(), funDAO.funcionToken(), cursoFind);
 
 					alumnoDAO.crud().save(alumno);
-
+					
+					Long idNota = (long) 0;
+					
+					alumnoFind = alumnoDAO.crud().buscarPorNombreAndApellido(nombre, apellidoP);
+					
+					
+					for (Ramo ramo : cursoFind.getRamos()) {
+						ramo.getIdRamo();
+						
+						
+						nota = new Nota(ramo.getIdRamo(), 0, 0, 0, 0, 0, 0, 0, 0, ramo, alumnoFind);
+						
+						notaDAO.crud().save(nota);
+					}
+					
+					
 					respuestaServidor = 200;
 
 				}
