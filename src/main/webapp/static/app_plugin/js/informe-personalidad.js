@@ -1,32 +1,39 @@
-
-
 $('#btn-primer-semestre').click(function(){
 
     var input = "<input class='form-control' type='text'></input>";
-    var contador = 0;
+    var contador = 1;
 
     $('td').each(function(i,item){
 
-        // if(i===1){
-
-        //     $(this).html(input);
-
-            
-
-        // }
         console.log(item);
 
-        contador = contador +6;
+        if(contador === i){
 
-        if(contador > i){
-            // console.log(contador);
-
-            contador = contador -1;
+            contador = contador + 5;
 
             $(this).html(input);
         }
 
-        
+    });
+});
+
+
+$('#btn-segundo-semestre').click(function(){
+
+    var input = "<input class='form-control' type='text'></input>";
+    var contador = 3;
+
+    $('td').each(function(i,item){
+
+        console.log(item);
+
+        if(contador === i){
+
+            contador = contador + 5;
+
+            $(this).html(input);
+        }
 
     });
+
 });
