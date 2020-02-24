@@ -26,6 +26,9 @@ public class Alumno implements Serializable {
 	private String nombre;
 
 	private String token;
+	
+	@Column(name="RUN")
+	private String run;
 
 	//uni-directional many-to-one association to Curso
 	@ManyToOne
@@ -34,13 +37,15 @@ public class Alumno implements Serializable {
 	public Alumno() {
 	}
 
-	public Alumno(Long idAlumno, String apellidoM, String apellidoP, String nombre, String token, Curso curso) {
+	public Alumno(Long idAlumno, String apellidoM, String apellidoP, String nombre, String token, String run,
+			Curso curso) {
 		super();
 		this.idAlumno = idAlumno;
 		this.apellidoM = apellidoM;
 		this.apellidoP = apellidoP;
 		this.nombre = nombre;
 		this.token = token;
+		this.run = run;
 		this.curso = curso;
 	}
 
@@ -83,6 +88,16 @@ public class Alumno implements Serializable {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+	public String getRun() {
+		return run;
+	}
+
+	public void setRun(String run) {
+		this.run = run;
+	}
+
+
 
 	public Curso getCurso() {
 		return this.curso;

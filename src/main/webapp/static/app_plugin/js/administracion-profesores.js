@@ -120,6 +120,7 @@ function obtenerListaProfesores() {
 $('#form-agregar-profesor').submit(function (event) {
     event.preventDefault();
 
+    var run = $('#run').val();
     var nombre = $('#nombre').val();
     var apellido = $('#apellido').val();
     var usuario = $('#usuario').val();
@@ -128,6 +129,7 @@ $('#form-agregar-profesor').submit(function (event) {
     var tokenCurso = $('#curso').val();
 
     var profesor = {
+        'run': run.toUpperCase(),
         'nombre': nombre.toUpperCase(),
         'apellido': apellido.toUpperCase(),
         'especialidad': especialidad.toUpperCase(),

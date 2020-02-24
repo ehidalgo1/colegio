@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2020 a las 20:34:46
+-- Tiempo de generación: 24-02-2020 a las 04:43:54
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -56,6 +56,7 @@ DELIMITER ;
 
 CREATE TABLE `alumno` (
   `ID_ALUMNO` bigint(20) NOT NULL,
+  `RUN` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `NOMBRE` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `APELLIDO_P` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `APELLIDO_M` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -67,11 +68,8 @@ CREATE TABLE `alumno` (
 -- Volcado de datos para la tabla `alumno`
 --
 
-INSERT INTO `alumno` (`ID_ALUMNO`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(1, 'EUGENIO', 'HIDALGO', 'DIAZ', 'SFDSFSDFSsdsdfsfs', 1),
-(2, 'RICARDO', 'HIDALGO', 'DIAZ', 'asdaASAASDasdadadafdsdfgdgf', 2),
-(8, 'FRANCISCA', 'VALENZUELA', 'GALVEZ', 'a5f83a61-f066-7ee9-ae2e-d0d0966a1c9e', 1),
-(11, 'KARLA', 'HIDALGO', 'ZAMORANO', '24c0f16d-7e3e-2c3b-ab7c-fa4d77e36dbe', 7);
+INSERT INTO `alumno` (`ID_ALUMNO`, `RUN`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
+(12, '20443229-7', 'SOFIA', 'SAN MARTIN', 'DIAZ', 'd25e65d3-5613-da25-66e6-6834de853962', 1);
 
 -- --------------------------------------------------------
 
@@ -315,16 +313,16 @@ CREATE TABLE `nota` (
 --
 
 INSERT INTO `nota` (`ID_NOTA`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
-(1, 1, 11, 6.5, 7, 6, 6, 6, 6, 0, 0),
-(2, 2, 11, 6, 6.5, 6, 6, 6, 6, 0, 0),
-(3, 3, 11, 7, 6, 6, 6, 6, 6, 7, 7),
-(4, 4, 11, 6.5, 7, 6, 6, 6, 0, 0, 0),
-(5, 5, 11, 6.5, 7, 7, 7, 7, 6, 0, 0),
-(6, 6, 11, 6.6, 6.6, 6, 6, 6, 0, 0, 0),
-(7, 7, 11, 6.7, 6.5, 7, 6, 6, 6, 6, 0),
-(8, 8, 11, 6.8, 7, 7, 7, 6, 0, 0, 0),
-(9, 9, 11, 7, 7, 7, 6, 6, 6, 0, 0),
-(10, 10, 11, 7, 7, 7, 6, 6, 0, 0, 0);
+(1, 1, 12, 7, 6.5, 6.6, 0, 0, 0, 0, 0),
+(2, 2, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 3, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 4, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 5, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 6, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(7, 7, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, 8, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(9, 9, 12, 0, 0, 0, 0, 0, 0, 0, 0),
+(10, 10, 12, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -368,6 +366,7 @@ CREATE TABLE `personalidad` (
 
 CREATE TABLE `profesor` (
   `ID_PROFESOR` bigint(20) NOT NULL,
+  `RUN` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `NOMBRE` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `APELLIDO` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `ESPECIALIDAD` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -381,10 +380,8 @@ CREATE TABLE `profesor` (
 -- Volcado de datos para la tabla `profesor`
 --
 
-INSERT INTO `profesor` (`ID_PROFESOR`, `NOMBRE`, `APELLIDO`, `ESPECIALIDAD`, `USUARIO`, `PASSWORD`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(1, 'FELIPE', 'FARIÑA', 'MATEMATICAS', 'FFARINA@COLEGIO.CL', 'colegio123', 'sfdeewrfergerregegre', 1),
-(4, 'GABRIEL', 'GOMEZ', 'HISTORIA', 'GGOMEZ@COLEGIO.CL', 'colegio123', 'dd6b281b-a858-8b11-04a2-38cbf524d8fb', 2),
-(5, 'GABRIELA', 'MISTRAL', 'CIENCIAS', 'GMISTRAL@COLEGIO.CL', 'colegio123', '9aac04cd-788a-8a0a-cf44-24a59eae05f2', 7);
+INSERT INTO `profesor` (`ID_PROFESOR`, `RUN`, `NOMBRE`, `APELLIDO`, `ESPECIALIDAD`, `USUARIO`, `PASSWORD`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
+(1, '17728632K', 'EUGENIO', 'HIDALGO', 'MATEMATICAS', 'EHIDALGO@COLEGIO.CL', 'COLEGIO123', 'FREEdsdfsfe-rfefsdfsd-sdfwwewdqws-qwddw', 1);
 
 -- --------------------------------------------------------
 
@@ -515,7 +512,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`

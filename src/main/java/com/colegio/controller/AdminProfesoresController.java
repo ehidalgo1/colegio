@@ -131,7 +131,7 @@ public class AdminProfesoresController {
 				
 				if (cursoFind != null) {
 					
-					nuevoProfe = new Profesor(idProfesor, profe.getApellido(), profe.getEspecialidad(), profe.getNombre(), "colegio123", fuDAO.funcionToken(), profe.getUsuario(), cursoFind, null);
+					nuevoProfe = new Profesor(idProfesor, profe.getApellido(), profe.getEspecialidad(), profe.getNombre(), "colegio123", fuDAO.funcionToken(), profe.getUsuario(),profe.getRun(), cursoFind, null);
 					
 					profDAO.crud().save(nuevoProfe);
 					

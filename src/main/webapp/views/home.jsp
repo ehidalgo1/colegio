@@ -36,6 +36,7 @@
                 </table>
             </div>
         </div>
+        
     </div>
     <c:import url="footer.jsp"></c:import>
     <script src="static/js/jquery-3.4.1.min.js"></script>

@@ -109,7 +109,7 @@ public class AdminAlumnosController {
 	@PostMapping("/guardar-alumno")
 	public Integer guardarAlumno(@RequestParam("nombre") String nombre,
 			@RequestParam("apellido_p") String apellidoP, @RequestParam("apellido_m") String apellidoM,
-			@RequestParam("token_curso") String tokenCurso) {
+			@RequestParam("token_curso") String tokenCurso, @RequestParam("run") String run) {
 
 		int respuestaServidor = 0;
 		Alumno alumnoFind = null;
@@ -130,25 +130,22 @@ public class AdminAlumnosController {
 
 					Long idAlumno = (long) 0;
 
-					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(), nombre.toUpperCase(), funDAO.funcionToken(), cursoFind);
-
+					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(), nombre.toUpperCase(), funDAO.funcionToken(),run, cursoFind);
+					
 					alumnoDAO.crud().save(alumno);
 					
-					Long idNota = (long) 0;
 					
 					alumnoFind = alumnoDAO.crud().buscarPorNombreAndApellido(nombre, apellidoP);
 					
 					
 					for (Ramo ramo : cursoFind.getRamos()) {
-						ramo.getIdRamo();
-						
 						
 						nota = new Nota(ramo.getIdRamo(), 0, 0, 0, 0, 0, 0, 0, 0, ramo, alumnoFind);
 						
 						notaDAO.crud().save(nota);
 					}
 					
-					
+					//exito
 					respuestaServidor = 200;
 
 				}

@@ -85,6 +85,7 @@ function llenarTablaAlumnos(){
 $('.form-agregar-alumno').submit(function(event){
     event.preventDefault();
 
+    var run = $('#run').val();
     var nombre = $('#nombre').val();
     var apellido_p = $('#apellido_p').val();
     var apellido_m = $('#apellido_m').val();
@@ -92,6 +93,7 @@ $('.form-agregar-alumno').submit(function(event){
 
     formData = new FormData();
 
+    formData.append('run',run);
     formData.append('nombre',nombre.toUpperCase());
     formData.append('apellido_p',apellido_p.toUpperCase());
     formData.append('apellido_m',apellido_m.toUpperCase());

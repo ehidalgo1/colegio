@@ -37,9 +37,12 @@ public class InformePersonalidadController {
 			
 			if(alumnoFind!=null) {
 				
-				personalidadPorAlumno = personDAO.crud().findByAlumno(alumnoFind);
+				model.addAttribute("alumno",alumnoFind);
+				
+				personalidadPorAlumno = personDAO.crud().buscarPorIdAlumno(alumnoFind.getIdAlumno());
 				
 				if(personalidadPorAlumno!=null) {
+					
 					
 					model.addAttribute("personalidad",personalidadPorAlumno);
 					
