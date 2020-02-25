@@ -31,7 +31,7 @@
 					<div class="col-md-12">
 						<h6>Alumno: ${alumno.nombre} ${alumno.apellidoP}
 							${alumno.apellidoM}</h6>
-						<h6>RUN: ${alumno.run}</h6>
+						<h6 id="run">RUN: ${alumno.run}</h6>
                         <h6>Curso: ${alumno.curso.numeroCurso}</h6>
                         <div class="table-responsive mt-3">
                             <table class="table table-hover">
@@ -54,13 +54,6 @@
                                     </tr>
                                     <tr>
                                         <td>Manifiesta una positiva autoestima o valoración de sí mismo</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trata de superar sus errores</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -223,12 +216,14 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="row">
+                            <div class="col-md-12"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
     <c:import url="footer.jsp"></c:import>
     <script

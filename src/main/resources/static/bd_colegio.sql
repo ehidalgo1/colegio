@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-02-2020 a las 04:43:54
+-- Tiempo de generación: 25-02-2020 a las 03:34:18
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -69,7 +69,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`ID_ALUMNO`, `RUN`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(12, '20443229-7', 'SOFIA', 'SAN MARTIN', 'DIAZ', 'd25e65d3-5613-da25-66e6-6834de853962', 1);
+(14, '12345678-0', 'SOFIA', 'SAN MARTIN', 'DIAZ', '1841dcac-a412-69ca-4ac1-e9b8eac4f5b7', 1);
 
 -- --------------------------------------------------------
 
@@ -296,6 +296,7 @@ INSERT INTO `curso_ramo` (`CURSO_ID_CURSO`, `RAMO_ID_RAMO`) VALUES
 
 CREATE TABLE `nota` (
   `ID_NOTA` bigint(20) NOT NULL,
+  `SEMESTRE_ID_SEMESTRE` int(11) NOT NULL,
   `RAMO_ID_RAMO` bigint(20) NOT NULL,
   `ALUMNO_ID_ALUMNO` bigint(20) NOT NULL,
   `NOTA_1` double NOT NULL,
@@ -307,22 +308,6 @@ CREATE TABLE `nota` (
   `NOTA_7` double NOT NULL,
   `NOTA_8` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `nota`
---
-
-INSERT INTO `nota` (`ID_NOTA`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
-(1, 1, 12, 7, 6.5, 6.6, 0, 0, 0, 0, 0),
-(2, 2, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 3, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 4, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 5, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 6, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 7, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(8, 8, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(9, 9, 12, 0, 0, 0, 0, 0, 0, 0, 0),
-(10, 10, 12, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -354,8 +339,7 @@ CREATE TABLE `personalidad` (
   `ACATA_NORMAS` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `DISPUESTO_CONCENTRADO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `POSITIVO_PARTICIPATIVO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  `OBSERVACIONES_PRIMER_SEMESTRE` text COLLATE utf8_spanish_ci NOT NULL,
-  `OBSERVACIONES_SEGUNDO_SEMESTRE` text COLLATE utf8_spanish_ci NOT NULL
+  `OBSERVACIONES` text COLLATE utf8_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -381,7 +365,8 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`ID_PROFESOR`, `RUN`, `NOMBRE`, `APELLIDO`, `ESPECIALIDAD`, `USUARIO`, `PASSWORD`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(1, '17728632K', 'EUGENIO', 'HIDALGO', 'MATEMATICAS', 'EHIDALGO@COLEGIO.CL', 'COLEGIO123', 'FREEdsdfsfe-rfefsdfsd-sdfwwewdqws-qwddw', 1);
+(1, '17728632K', 'EUGENIO', 'HIDALGO', 'MATEMATICAS', 'EHIDALGO@COLEGIO.CL', 'COLEGIO123', 'FREEdsdfsfe-rfefsdfsd-sdfwwewdqws-qwddw', 1),
+(2, '15229887-1', 'ALAN', 'RAMIREZ', 'TECNOLOGIA', 'SEGOVIA@COLEGIO.CL', 'colegio123', 'e8ccc91e-1d54-2da1-a234-dee7093011e3', 4);
 
 -- --------------------------------------------------------
 
@@ -439,6 +424,26 @@ CREATE TABLE `rol` (
   `TOKEN` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `semestre`
+--
+
+CREATE TABLE `semestre` (
+  `ID_SEMESTRE` int(11) NOT NULL,
+  `SEMESTRE` int(11) NOT NULL,
+  `NOMBRE` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `semestre`
+--
+
+INSERT INTO `semestre` (`ID_SEMESTRE`, `SEMESTRE`, `NOMBRE`) VALUES
+(1, 1, '1° SEMESTRE'),
+(2, 2, '1° SEMESTRE');
+
 --
 -- Índices para tablas volcadas
 --
@@ -469,7 +474,8 @@ ALTER TABLE `curso_ramo`
 ALTER TABLE `nota`
   ADD PRIMARY KEY (`ID_NOTA`),
   ADD KEY `RAMO_ID_RAMO` (`RAMO_ID_RAMO`),
-  ADD KEY `ALUMNO_ID_ALUMNO` (`ALUMNO_ID_ALUMNO`);
+  ADD KEY `ALUMNO_ID_ALUMNO` (`ALUMNO_ID_ALUMNO`),
+  ADD KEY `SEMESTRE_ID_SEMESTRE` (`SEMESTRE_ID_SEMESTRE`);
 
 --
 -- Indices de la tabla `personalidad`
@@ -505,6 +511,12 @@ ALTER TABLE `rol`
   ADD PRIMARY KEY (`ID_ROL`);
 
 --
+-- Indices de la tabla `semestre`
+--
+ALTER TABLE `semestre`
+  ADD PRIMARY KEY (`ID_SEMESTRE`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -512,7 +524,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -536,7 +548,7 @@ ALTER TABLE `personalidad`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_PROFESOR` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ramo`
@@ -549,6 +561,12 @@ ALTER TABLE `ramo`
 --
 ALTER TABLE `rol`
   MODIFY `ID_ROL` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `semestre`
+--
+ALTER TABLE `semestre`
+  MODIFY `ID_SEMESTRE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -572,7 +590,8 @@ ALTER TABLE `curso_ramo`
 --
 ALTER TABLE `nota`
   ADD CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`RAMO_ID_RAMO`) REFERENCES `ramo` (`ID_RAMO`),
-  ADD CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`);
+  ADD CONSTRAINT `nota_ibfk_2` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`),
+  ADD CONSTRAINT `nota_ibfk_3` FOREIGN KEY (`SEMESTRE_ID_SEMESTRE`) REFERENCES `semestre` (`ID_SEMESTRE`);
 
 --
 -- Filtros para la tabla `personalidad`

@@ -41,6 +41,9 @@ public class Nota implements Serializable {
 	@Column(name="NOTA_8")
 	private double nota8;
 
+	@ManyToOne
+	private Semestre semestre;
+	
 	//uni-directional many-to-one association to Ramo
 	@ManyToOne
 	private Ramo ramo;

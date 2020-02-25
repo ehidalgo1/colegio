@@ -8,5 +8,6 @@
 		<class>com.colegio.entity.Ramo</class>
 		<class>com.colegio.entity.Rol</class>
 		<class>com.colegio.entity.Personalidad</class>
+		<class>com.colegio.entity.Semestre</class>
 	</persistence-unit>
 </persistence>

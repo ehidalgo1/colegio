@@ -24,6 +24,7 @@ body{
   width: 17rem;
   height: 100vh;
   position: fixed;
+  background-color: rgb(106, 104, 238);
   top: 0;
   left: 0;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);

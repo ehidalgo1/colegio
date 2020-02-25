@@ -17,4 +17,7 @@ public interface IAlumnoDAO extends CrudRepository<Alumno, Long>{
 	List<Alumno> buscarTodosPorIdCurso(@Param("idCurso") Long idCurso);
 	
 	Alumno findByToken(String token);
+	
+	Alumno findByRun(String run);
+	
 }
