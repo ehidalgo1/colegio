@@ -1,17 +1,33 @@
+
+
+$('#btn-ver-informe').click(function(){
+
+$('#informe-personalidad').prop('hidden', false);
+
+});
+
+
 $('#btn-primer-semestre').click(function(){
 
     $(this).attr('hidden',true);
+    $('#btn-guardar-informe-personalidad').prop('hidden',false);
     $('#btn-guardar-primer-semestre').prop('hidden', false);
-    var input = "<input class='form-control' type='text'></input>";
+    var input = "<select class='form-control'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
     var contador = 1;
 
     $('td').each(function(i,item){
 
         if(contador === i){
 
-            contador = contador + 5;
+            console.log(i);
+
+            if(i===64){
+                input = "<textarea class='form-control' id='comentario' rows='3'></textarea>";
+            }
 
             $(this).html(input);
+
+            contador = contador + 3;
         }
 
     });

@@ -56,7 +56,7 @@ public class Nota implements Serializable {
 	}
 
 	public Nota(Long idNota, double nota1, double nota2, double nota3, double nota4, double nota5, double nota6,
-			double nota7, double nota8, Ramo ramo, Alumno alumno) {
+			double nota7, double nota8, Semestre semestre, Ramo ramo, Alumno alumno) {
 		super();
 		this.idNota = idNota;
 		this.nota1 = nota1;
@@ -67,6 +67,7 @@ public class Nota implements Serializable {
 		this.nota6 = nota6;
 		this.nota7 = nota7;
 		this.nota8 = nota8;
+		this.semestre = semestre;
 		this.ramo = ramo;
 		this.alumno = alumno;
 	}
@@ -158,5 +159,14 @@ public class Nota implements Serializable {
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
+
+	public Semestre getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
+	}
+	
 
 }

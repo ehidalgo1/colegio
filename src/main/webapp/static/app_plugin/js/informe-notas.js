@@ -1,90 +1,186 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 });
 
+$('#seleccion-semestre').change(function () {
+  $('#detalle-notas').prop('hidden', true);
+});
 
 
-function editarNotas(i){
+//funcion redondear decimales
+function redondeo(numero, decimales) {
+  var flotante = parseFloat(numero);
+  var resultado = Math.round(flotante * Math.pow(10, decimales)) / Math.pow(10, decimales);
+  return resultado;
+}
 
-    $('#btn-editar-nota-'+i).attr('hidden',true);
-    $('.btn-secondary').each(function(i,item){
-      $(this).attr('disabled', true);
-    });
+$('#btn-ver-notas').click(function () {
 
-    $('#fila-'+i+' td').each(function(i,item){
-        
-        if (i > 0 && i < 9) {
+  var semestre = $('#seleccion-semestre').val();
 
-            nota = item.textContent;
-      
-            input = "<input id='nota-"+i+"' type='text' class='form-control' />";
-            
-      
-            $(this).html(input);
-      
-            $("#nota-"+i+"").val(nota);
-      
-          }
+  if (semestre !== '') {
 
-    });
+    var runAlumno = $('#run-alumno').text();
+    var parte = runAlumno.split(" ");
+    var run = parte[1];
 
-    $('#btn-guardar-notas-'+i).prop('hidden',false);
+
+    $('#detalle-notas').prop('hidden', false);
+
+    obtenerNotasPorSemestre(run,semestre);
+
+
+  }
+
+});
+
+function obtenerNotasPorSemestre(run,semestre){
+
+  $.ajax({
+    url: '/obtener-notas-alumno/' + run + '/' + semestre,
+    type: 'get',
+    beforeSend: function () {
+
+    },
+    success: function (request) {
+      var respuesta = JSON.stringify(request);
+      var objeto = JSON.parse(respuesta);
+
+      var lista = "";
+      var ultimaLinea = "";
+      var promedio = 0;
+      var btnEditar = "";
+      var btnGuardar = "";
+      var promedioFinal = 0;
+
+
+      $('#tabla-notas').empty();
+
+      for (let i = 0; i < objeto.length; i++) {
+
+        btnEditar = "<button id='btn-editar-nota-" + i + "' class='btn btn-secondary btn-sm rounded-circle' onclick='editarNotas(" + i + ")'>+</button>"
+        btnGuardar = "<button id='btn-guardar-notas-" + i + "' class='btn btn-success btn-sm rounded-circle' hidden='true' onclick='guardarNotas(" + i + ")'>Ok</button>"
+
+        promedio = (objeto[i].nota1 + objeto[i].nota2 + objeto[i].nota3 + objeto[i].nota4 + objeto[i].nota5 + objeto[i].nota6 + objeto[i].nota7 + objeto[i].nota8) / 8;
+
+        promedioFinal = promedioFinal + promedio;
+
+        lista = "<tr id='fila-" + i + "'><td>" + objeto[i].ramo.nombre + "</td><td>" + objeto[i].nota1 + "</td><td>" + objeto[i].nota2 + "</td><td>" + objeto[i].nota3 + "</td><td>" + objeto[i].nota4 + "</td><td>" + objeto[i].nota5 + "</td><td>" + objeto[i].nota6 + "</td><td>" + objeto[i].nota7 + "</td><td>" + objeto[i].nota8 + "</td><td>" + redondeo(promedio, 1) + "</td><td>" + btnEditar + " " + btnGuardar + "</td></tr>";
+
+        $('#tabla-notas').append(lista);
+
+      }
+
+      promedioFinal = promedioFinal / objeto.length;
+
+      ultimaLinea = "<thead><tr><th>PROMEDIO FINAL</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th id='promedio-final'>" + redondeo(promedioFinal, 1) + "</th></tr></thead>";
+
+      $('#tabla-notas').append(ultimaLinea);
+
+
+    },
+    error: function () {
+      console.log("error");
+
+    },
+    complete: function () {
+
+    }
+  });
+
+};
+
+
+
+function editarNotas(i) {
+
+  $('#btn-editar-nota-' + i).attr('hidden', true);
+  $('.btn-secondary').each(function (i, item) {
+    $(this).attr('disabled', true);
+  });
+
+  $('#fila-' + i + ' td').each(function (i, item) {
+
+    if (i > 0 && i < 9) {
+
+      nota = item.textContent;
+
+      input = "<input id='nota-" + i + "' type='text' class='form-control' />";
+
+
+      $(this).html(input);
+
+      $("#nota-" + i + "").val(nota);
+
+    }
+
+  });
+
+  $('#btn-guardar-notas-' + i).prop('hidden', false);
 
 
 };
 
-function guardarNotas(i){
+function guardarNotas(i) {
 
-    var lista = [];
-    var valorCelda = "";
+  var lista = [];
+  var valorCelda = "";
 
-    $('#fila-'+i+' td').each(function(i,item){
+  var semestre = $('#seleccion-semestre').val();
+  var runAlumno = $('#run-alumno').text();
+  var parte = runAlumno.split(" ");
+  var run = parte[1];
+  var promedioFinal = $('#promedio-final').text();
 
-        if(i===0){
+  console.log("promedio final:"+promedioFinal);
 
-            valorCelda = item.textContent;
+  $('#fila-' + i + ' td').each(function (i, item) {
 
-        }else if(i<9){
+    if (i === 0) {
 
-            valorCelda = $("#nota-"+i+"").val();
-        }
+      valorCelda = item.textContent;
 
-          lista.push(valorCelda);
+    } else if (i < 9) {
 
-          if (i<9) {
-            $(this).html(valorCelda);
-          }
-    
-      });
+      valorCelda = $("#nota-" + i + "").val();
+    }
 
-      var token = $('#token-alumno').val();
+    lista.push(valorCelda);
 
-      $.ajax({
-          url: '/guardar-notas/'+token,
-          type: 'post',
-          data: JSON.stringify(lista),
-          contentType: 'application/json',
-          dataType: 'json',
-          beforeSend: function(){
+    if (i < 9) {
+      $(this).html(valorCelda);
+    }
 
-          },
-          success: function(request){
+  });
 
-            if(request===200){
-                console.log("exito");
+  lista.push(promedioFinal);
 
-                //recargando pagina
-                location.reload(true);
-            }
-              
-          },
-          error: function(){
-            console.log("error");
+  $.ajax({
+    url: '/guardar-notas/'+run+'/'+semestre,
+    type: 'post',
+    data: JSON.stringify(lista),
+    contentType: 'application/json',
+    dataType: 'json',
+    beforeSend: function () {
 
-          },
-          complete: function(){
+    },
+    success: function (request) {
 
-          }
-      });
+      if (request === 200) {
+        console.log("exito");
+
+        obtenerNotasPorSemestre(run,semestre);
+
+      }
+
+    },
+    error: function () {
+      console.log("error");
+
+    },
+    complete: function () {
+
+    }
+  });
 
 };

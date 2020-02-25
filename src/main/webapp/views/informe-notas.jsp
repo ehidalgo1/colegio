@@ -22,96 +22,68 @@
 </head>
 <body>
 	<c:import url="menu.jsp"></c:import>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="card">
 			<div class="card-header">
 				<h4>Notas Alumno</h4>
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<h6>Alumno: ${alumno.nombre} ${alumno.apellidoP}
 							${alumno.apellidoM}</h6>
-						<h6>RUN: ${alumno.run}</h6>
+						<h6 id="run-alumno">RUN: ${alumno.run}</h6>
 						<h6>Curso: ${alumno.curso.numeroCurso}</h6>
 						<input id="token-alumno" type="text" value="${alumno.token}"
 							hidden="true" readonly="readonly">
-						<table class="table table-hover mt-3">
-							<thead>
-								<tr>
-									<th>RAMO</th>
-									<th>NOTA 1</th>
-									<th>NOTA 2</th>
-									<th>NOTA 3</th>
-									<th>NOTA 4</th>
-									<th>NOTA 5</th>
-									<th>NOTA 6</th>
-									<th>NOTA 7</th>
-									<th>NOTA 8</th>
-									<th>PROMEDIO</th>
-									<th>OPCIONES</th>
-								</tr>
-							</thead>
-							<tbody id="tabla-notas">
-								<c:set var="contador" value="${0}" />
-								<c:set var="total" value="${0}" />
-								<c:set var="promedio" value="${0}" />
-								<c:forEach items="${listanotas}" var="item">
-									<tr id="fila-${contador}">
-										<td>${item.ramo.nombre}</td>
-										<td>${item.nota1}</td>
-										<td>${item.nota2}</td>
-										<td>${item.nota3}</td>
-										<td>${item.nota4}</td>
-										<td>${item.nota5}</td>
-										<td>${item.nota6}</td>
-										<td>${item.nota7}</td>
-										<td>${item.nota8}</td>
-										<c:set var="total"
-											value="${ (total + item.nota1 + item.nota2 + item.nota3 + item.nota4 + item.nota5 + item.nota6 + item.nota7 + item.nota8 ) /8 }" />
-										<c:set var="promedio" value="${promedio + total}" />
-
-										<c:choose>
-											<c:when test="${total>1}">
-												<td><fmt:formatNumber value="${total}"
-														maxFractionDigits="1" /></td>
-											</c:when>
-											<c:otherwise>
-												<td>0</td>
-											</c:otherwise>
-										</c:choose>
-
-										<td><button id="btn-editar-nota-${contador}"
-												class="btn btn-secondary btn-sm rounded-circle"
-												onclick="editarNotas(${contador})">+</button>
-											<button hidden="true" id="btn-guardar-notas-${contador}"
-												onclick="guardarNotas(${contador})"
-												class="btn btn-success btn-sm rounded-circle">Ok</button></td>
-									</tr>
-									<c:set var="contador" value="${contador +1 }" />
-								</c:forEach>
-								<tr>
-									<th>PROMEDIO FINAL</th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<c:set var="promedio" value="${promedio / contador}" />
-									<th><fmt:formatNumber value="${promedio}"
-												maxFractionDigits="1" /></th>
-									<th></th>
-								</tr>
-							</tbody>
-						</table>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group row">
+							<h6 class="col-md-3">Semestre:</h6>
+							<div class="col-md-5">
+								<select id="seleccion-semestre" class="form-control">
+									<option value="">Seleccione</option>
+									<c:forEach items="${listaSemestres}" var="sem">
+										<option value="${sem.idSemestre}">${sem.nombre}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer" align="right">
+				<button class="btn btn-primary" id="btn-ver-notas">Ver
+					Notas</button>
+			</div>
 		</div>
-		
+		<div class="card mt-5" hidden="true" id="detalle-notas">
+			<div class="card-header"></div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th>RAMO</th>
+								<th>NOTA 1</th>
+								<th>NOTA 2</th>
+								<th>NOTA 3</th>
+								<th>NOTA 4</th>
+								<th>NOTA 5</th>
+								<th>NOTA 6</th>
+								<th>NOTA 7</th>
+								<th>NOTA 8</th>
+								<th>PROMEDIO</th>
+								<th>OPCIONES</th>
+							</tr>
+						</thead>
+						<tbody id="tabla-notas">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script

@@ -1,5 +1,6 @@
 package com.colegio.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.colegio.DAO.AlumnoDAO;
 import com.colegio.DAO.NotaDAO;
 import com.colegio.DAO.RamoDAO;
+import com.colegio.DAO.SemestreDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Nota;
 import com.colegio.entity.Profesor;
 import com.colegio.entity.Ramo;
+import com.colegio.entity.Semestre;
 
 @Controller
 public class InformeNotasController {
@@ -34,6 +37,9 @@ public class InformeNotasController {
 	@Autowired
 	private RamoDAO ramoDAO;
 	
+	@Autowired
+	private SemestreDAO semDAO;
+	
 	@GetMapping("/informe-notas/{token}")
 	public String goInformeNotas(@PathVariable String token,Model model, HttpSession session) {
 		
@@ -41,6 +47,8 @@ public class InformeNotasController {
 		String pagina = "";
 		Alumno alumnoFind = null;
 		List<Nota> listaNotasPorAlumno = null;
+		List<Semestre> listaSemestres = null;
+		Semestre semestreFind = null;
 		
 		try {
 			
@@ -48,8 +56,13 @@ public class InformeNotasController {
 			
 			if (alumnoFind!=null) {
 				
-				listaNotasPorAlumno = notaDAO.crud().findByAlumno(alumnoFind);
+				semestreFind = semDAO.crud().findBySemestre(1);
 				
+				listaNotasPorAlumno = notaDAO.crud().findByAlumnoAndSemestre(alumnoFind, semestreFind);
+				
+				listaSemestres = (List<Semestre>) semDAO.crud().findAll();
+				
+				model.addAttribute("listaSemestres",listaSemestres);
 				model.addAttribute("alumno", alumnoFind);
 				model.addAttribute("listanotas",listaNotasPorAlumno);
 				
@@ -73,8 +86,46 @@ public class InformeNotasController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/guardar-notas/{tokenAlumno}")
-	public Integer guardarNotasAlumno(@PathVariable String tokenAlumno,@RequestBody List<String> listaNotas) {
+	@GetMapping("/obtener-notas-alumno/{run}/{semestre}")
+	public List<Nota> listaNotasAlumnoSemestre(@PathVariable String run, @PathVariable String semestre){
+		
+		List<Nota> listaNotas = null;
+		Alumno alumnoFind = null;
+		Semestre semestreFind = null;
+		
+		try {
+			
+			alumnoFind = alumDAO.crud().findByRun(run);
+			
+			if (alumnoFind!=null) {
+				
+				int numeroSemestre = Integer.parseInt(semestre);
+				
+				semestreFind = semDAO.crud().findBySemestre(numeroSemestre);
+				
+				if (semestreFind!=null) {
+					
+					listaNotas = notaDAO.crud().findByAlumnoAndSemestre(alumnoFind, semestreFind);
+					
+				}
+				
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			listaNotas = new ArrayList<Nota>();
+		}
+		
+		return listaNotas;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/guardar-notas/{run}/{semestre}")
+	public Integer guardarNotasAlumno(@PathVariable String run, @PathVariable Long semestre,@RequestBody List<String> listaNotas) {
 		
 		int respuestaServidor = 0;
 		Alumno alumnoFind = null;
@@ -85,7 +136,7 @@ public class InformeNotasController {
 			
 			if (!listaNotas.isEmpty()) {
 				
-				alumnoFind = alumDAO.crud().findByToken(tokenAlumno);
+				alumnoFind = alumDAO.crud().findByRun(run);
 				
 				if (alumnoFind!=null) {
 					
@@ -95,8 +146,7 @@ public class InformeNotasController {
 					
 					if (ramoFind!=null) {
 						
-						
-						notaFind = notaDAO.crud().buscarPorIdAlumnoAndIdNota(ramoFind.getIdRamo(), alumnoFind.getIdAlumno());
+						notaFind = notaDAO.crud().buscarPorIdAlumnoAndIdNotaAndIdSemestre(ramoFind.getIdRamo(), alumnoFind.getIdAlumno(), semestre);
 						
 						double nota1 = 0;
 						double nota2 = 0;
@@ -106,6 +156,7 @@ public class InformeNotasController {
 						double nota6 = 0;
 						double nota7 = 0;
 						double nota8 = 0;
+						double promedioFinal = 0;
 						
 						nota1 = Double.parseDouble(listaNotas.get(1));
 						nota2 = Double.parseDouble(listaNotas.get(2));
@@ -115,6 +166,8 @@ public class InformeNotasController {
 						nota6 = Double.parseDouble(listaNotas.get(6));
 						nota7 = Double.parseDouble(listaNotas.get(7));
 						nota8 = Double.parseDouble(listaNotas.get(8));
+						
+						
 						
 						notaFind.setNota1(nota1);
 						notaFind.setNota2(nota2);
@@ -126,6 +179,7 @@ public class InformeNotasController {
 						notaFind.setNota8(nota8);
 						
 						notaDAO.crud().save(notaFind);
+						
 						
 						respuestaServidor = 200;
 						

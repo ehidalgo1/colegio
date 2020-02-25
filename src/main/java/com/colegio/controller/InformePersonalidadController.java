@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.colegio.DAO.AlumnoDAO;
 import com.colegio.DAO.PersonalidadDAO;
+import com.colegio.DAO.SemestreDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Personalidad;
+import com.colegio.entity.Semestre;
 
 @Controller
 public class InformePersonalidadController {
@@ -24,6 +26,9 @@ public class InformePersonalidadController {
 
 	@Autowired
 	private AlumnoDAO alumDAO;
+	
+	@Autowired
+	private SemestreDAO semDAO;
 
 	@GetMapping("/informe-personalidad/{token}")
 	public String goInformePersonalidad(@PathVariable String token, HttpSession session, Model model) {
@@ -67,8 +72,8 @@ public class InformePersonalidadController {
 	}
 
 	@ResponseBody
-	@PostMapping("/guardar-personalidad-primer-semestre/{runAlumno}")
-	public Integer guardarPersonalidadAlumnoPrimerSemestre(@PathVariable String runAlumno,
+	@PostMapping("/guardar-informe-personalidad/{runAlumno}/{semestre}")
+	public Integer guardarPersonalidadAlumnoPrimerSemestre(@PathVariable String runAlumno,@PathVariable String semestre,
 			@RequestParam("campo_0") String campo0, @RequestParam("campo_1") String campo1,
 			@RequestParam("campo_2") String campo2, @RequestParam("campo_3") String campo3,
 			@RequestParam("campo_4") String campo4, @RequestParam("campo_5") String campo5,
@@ -83,6 +88,7 @@ public class InformePersonalidadController {
 
 		int respuestaServidor = 0;
 		Alumno alumnoFind = null;
+		Semestre semestreFind = null;
 		Personalidad personalidad = null;
 		
 		try {
@@ -92,12 +98,16 @@ public class InformePersonalidadController {
 			
 			if (alumnoFind!=null) {
 				
+				int nroSemestre = Integer.parseInt(semestre);
+				
+				semestreFind = semDAO.crud().findBySemestre(nroSemestre);
+				
 				Long idPersonalidad = (long) 0;
 				
-				personalidad = new Personalidad(idPersonalidad,campo0, campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9, campo10, campo11, campo12, campo13, campo14, campo15, campo16, campo17, campo18, campo19, campo20, campo21, alumnoFind);
-				
+				personalidad = new Personalidad(idPersonalidad,campo0, campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9, campo10, campo11, campo12, campo13, campo14, campo15, campo16, campo17, campo18, campo19, campo20, campo21, alumnoFind,semestreFind);
 				
 				personDAO.crud().save(personalidad);
+				
 			}
 			
 			

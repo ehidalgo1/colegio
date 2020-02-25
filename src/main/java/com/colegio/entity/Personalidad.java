@@ -86,29 +86,31 @@ public class Personalidad implements Serializable {
 	@Column(name="POSITIVO_PARTICIPATIVO")
 	private String positivoParticipativo;
 
-
 	@Lob
 	@Column(name="OBSERVACIONES")
 	private String observaciones;
+	
 
 
 
 	//uni-directional many-to-one association to Alumno
 	@ManyToOne
 	private Alumno alumno;
+	
+	@ManyToOne
+	private Semestre semestre;
 
 	public Personalidad() {
+		
 	}
 
-	
-	
 	public Personalidad(Long idPersonalidad, String higienePresentacion, String autoestimaValoracion,
 			String superaErrores, String toleraFrustraciones, String controlaImpulsos, String integraGrupo,
 			String resuelveProblemasInterpersonales, String respetaNormasConvivencia, String actitudRespetuosa,
 			String preocupacionSolidaridad, String respetaBienes, String trabajoContinuo, String responsableDeberes,
 			String participaClases, String demuestraEmprendimiento, String intercambiaConocimientos,
 			String superaDificultades, String trabajaClases, String acataNormas, String dispuestoConcentrado,
-			String positivoParticipativo, String observaciones, Alumno alumno) {
+			String positivoParticipativo, String observaciones, Alumno alumno, Semestre semestre) {
 		super();
 		this.idPersonalidad = idPersonalidad;
 		this.higienePresentacion = higienePresentacion;
@@ -134,7 +136,9 @@ public class Personalidad implements Serializable {
 		this.positivoParticipativo = positivoParticipativo;
 		this.observaciones = observaciones;
 		this.alumno = alumno;
+		this.semestre = semestre;
 	}
+
 
 
 	public Long getIdPersonalidad() {
@@ -327,6 +331,14 @@ public class Personalidad implements Serializable {
 
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
+	}
+
+	public Semestre getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(Semestre semestre) {
+		this.semestre = semestre;
 	}
 
 	 

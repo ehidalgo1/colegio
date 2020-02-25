@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-02-2020 a las 03:34:18
+-- Tiempo de generación: 26-02-2020 a las 00:53:28
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -69,7 +69,8 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`ID_ALUMNO`, `RUN`, `NOMBRE`, `APELLIDO_P`, `APELLIDO_M`, `TOKEN`, `CURSO_ID_CURSO`) VALUES
-(14, '12345678-0', 'SOFIA', 'SAN MARTIN', 'DIAZ', '1841dcac-a412-69ca-4ac1-e9b8eac4f5b7', 1);
+(19, '20.693.622-3', 'SOFIA', 'SAN MARTIN', 'DIAZ', 'abfcfcbe-25b0-32e8-016b-12b545972eeb', 1),
+(20, '20533417-9', 'KARLA', 'HIDALGO', 'ZAMORANO', 'cd639e8a-41f7-cb3a-e0c0-bc32bb0e93ee', 1);
 
 -- --------------------------------------------------------
 
@@ -309,6 +310,52 @@ CREATE TABLE `nota` (
   `NOTA_8` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `nota`
+--
+
+INSERT INTO `nota` (`ID_NOTA`, `SEMESTRE_ID_SEMESTRE`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
+(1, 1, 10, 19, 4.9, 6.4, 5.8, 6.5, 7, 0, 6.6, 6.5),
+(2, 1, 9, 19, 7, 7, 7, 7, 7, 0, 0, 0),
+(3, 1, 7, 19, 6, 6, 6, 6.5, 0, 0, 0, 0),
+(4, 1, 5, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 1, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 1, 2, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(7, 1, 1, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, 1, 4, 19, 7, 7, 7, 7, 7, 7, 0, 0),
+(9, 1, 6, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(10, 1, 8, 19, 6, 6.9, 0, 0, 0, 0, 0, 0),
+(11, 2, 10, 19, 6.9, 7, 6.4, 7, 7, 6.2, 5, 5),
+(12, 2, 9, 19, 7, 7, 7, 7, 7, 7, 7, 7),
+(13, 2, 7, 19, 7, 7, 7, 7, 7, 6, 6, 6),
+(14, 2, 5, 19, 6, 5.5, 7, 7, 7, 7, 7, 7),
+(15, 2, 3, 19, 7, 6.9, 7, 7, 7, 7, 7, 7),
+(16, 2, 2, 19, 7, 7, 7, 7, 7, 7, 7, 0),
+(17, 2, 1, 19, 7, 7, 7, 7, 7, 5, 5, 5),
+(18, 2, 4, 19, 7, 7, 7, 7, 7, 7, 7, 7),
+(19, 2, 6, 19, 7, 7, 7, 7, 7, 7, 7, 0),
+(20, 2, 8, 19, 7, 7, 7, 7, 7, 7, 7, 7),
+(21, 1, 10, 20, 6.5, 6.6, 6.8, 7, 7, 6.4, 0, 0),
+(22, 1, 9, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(23, 1, 7, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(24, 1, 5, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(25, 1, 3, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(26, 1, 2, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(27, 1, 1, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(28, 1, 4, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(29, 1, 6, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(30, 1, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(31, 2, 10, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 2, 9, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(33, 2, 7, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(34, 2, 5, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(35, 2, 3, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(36, 2, 2, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(37, 2, 1, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(38, 2, 4, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(39, 2, 6, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+(40, 2, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -317,6 +364,7 @@ CREATE TABLE `nota` (
 
 CREATE TABLE `personalidad` (
   `ID_PERSONALIDAD` bigint(20) NOT NULL,
+  `SEMESTRE_ID_SEMESTRE` int(11) NOT NULL,
   `ALUMNO_ID_ALUMNO` bigint(20) NOT NULL,
   `HIGIENE_PRESENTACION` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `AUTOESTIMA_VALORACION` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
@@ -442,7 +490,7 @@ CREATE TABLE `semestre` (
 
 INSERT INTO `semestre` (`ID_SEMESTRE`, `SEMESTRE`, `NOMBRE`) VALUES
 (1, 1, '1° SEMESTRE'),
-(2, 2, '1° SEMESTRE');
+(2, 2, '2° SEMESTRE');
 
 --
 -- Índices para tablas volcadas
@@ -482,7 +530,8 @@ ALTER TABLE `nota`
 --
 ALTER TABLE `personalidad`
   ADD PRIMARY KEY (`ID_PERSONALIDAD`),
-  ADD KEY `personalidad_ibfk_1` (`ALUMNO_ID_ALUMNO`);
+  ADD KEY `personalidad_ibfk_1` (`ALUMNO_ID_ALUMNO`),
+  ADD KEY `SEMESTRE_ID_SEMESTRE` (`SEMESTRE_ID_SEMESTRE`);
 
 --
 -- Indices de la tabla `profesor`
@@ -524,7 +573,7 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_ALUMNO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -536,7 +585,7 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `personalidad`
@@ -597,7 +646,8 @@ ALTER TABLE `nota`
 -- Filtros para la tabla `personalidad`
 --
 ALTER TABLE `personalidad`
-  ADD CONSTRAINT `personalidad_ibfk_1` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `personalidad_ibfk_1` FOREIGN KEY (`ALUMNO_ID_ALUMNO`) REFERENCES `alumno` (`ID_ALUMNO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `personalidad_ibfk_2` FOREIGN KEY (`SEMESTRE_ID_SEMESTRE`) REFERENCES `semestre` (`ID_SEMESTRE`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `profesor`

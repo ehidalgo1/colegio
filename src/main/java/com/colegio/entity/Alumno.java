@@ -49,6 +49,8 @@ public class Alumno implements Serializable {
 		this.curso = curso;
 	}
 
+
+
 	public Long getIdAlumno() {
 		return this.idAlumno;
 	}
@@ -96,8 +98,6 @@ public class Alumno implements Serializable {
 	public void setRun(String run) {
 		this.run = run;
 	}
-
-
 
 	public Curso getCurso() {
 		return this.curso;

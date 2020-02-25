@@ -12,11 +12,13 @@ import com.colegio.DAO.AlumnoDAO;
 import com.colegio.DAO.CursoDAO;
 import com.colegio.DAO.FuncionesDAO;
 import com.colegio.DAO.NotaDAO;
+import com.colegio.DAO.SemestreDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Curso;
 import com.colegio.entity.Nota;
 import com.colegio.entity.Profesor;
 import com.colegio.entity.Ramo;
+import com.colegio.entity.Semestre;
 
 import java.util.List;
 
@@ -35,32 +37,33 @@ public class AdminAlumnosController {
 
 	@Autowired
 	private FuncionesDAO funDAO;
-	
+
 	@Autowired
 	private NotaDAO notaDAO;
 
+	@Autowired
+	private SemestreDAO semDAO;
+
 	@GetMapping("/administracion-alumnos")
-	public String goAdminAlumnos(HttpSession session,Model model) {
+	public String goAdminAlumnos(HttpSession session, Model model) {
 		String pagina = "";
 		Profesor profe = null;
 
 		try {
 
 			Profesor profeSession = (Profesor) session.getAttribute("usuario");
-			
+
 			if (profeSession != null) {
-				
+
 				profe = (Profesor) session.getAttribute("usuario");
 
 				model.addAttribute("profesor", profe);
-				
+
 				pagina = "administracion-alumnos";
-				
-				
-			}else {
+
+			} else {
 				pagina = "redirect:login";
 			}
-			
 
 		} catch (Exception e) {
 
@@ -107,9 +110,9 @@ public class AdminAlumnosController {
 
 	@ResponseBody
 	@PostMapping("/guardar-alumno")
-	public Integer guardarAlumno(@RequestParam("nombre") String nombre,
-			@RequestParam("apellido_p") String apellidoP, @RequestParam("apellido_m") String apellidoM,
-			@RequestParam("token_curso") String tokenCurso, @RequestParam("run") String run) {
+	public Integer guardarAlumno(@RequestParam("nombre") String nombre, @RequestParam("apellido_p") String apellidoP,
+			@RequestParam("apellido_m") String apellidoM, @RequestParam("token_curso") String tokenCurso,
+			@RequestParam("run") String run) {
 
 		int respuestaServidor = 0;
 		Alumno alumnoFind = null;
@@ -121,37 +124,58 @@ public class AdminAlumnosController {
 		try {
 
 			alumnoFind = alumnoDAO.crud().buscarPorNombreAndApellido(nombre, apellidoP);
-			
+
 			if (alumnoFind == null) {
-				
+
 				cursoFind = cursoDAO.crud().findByToken(tokenCurso);
-				
+
 				if (cursoFind != null) {
 
 					Long idAlumno = (long) 0;
 
-					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(), nombre.toUpperCase(), funDAO.funcionToken(),run, cursoFind);
-					
+					alumno = new Alumno(idAlumno, apellidoM.toUpperCase(), apellidoP.toUpperCase(),
+							nombre.toUpperCase(), funDAO.funcionToken(), run, cursoFind);
+
 					alumnoDAO.crud().save(alumno);
-					
-					
+
 					alumnoFind = alumnoDAO.crud().buscarPorNombreAndApellido(nombre, apellidoP);
-					
-					
+
+					Semestre semestreUno = semDAO.crud().findBySemestre(1);
+					Semestre semestreDos = semDAO.crud().findBySemestre(2);
+
+					Long idNota = (long) 1;
+
 					for (Ramo ramo : cursoFind.getRamos()) {
-						
-						nota = new Nota(ramo.getIdRamo(), 0, 0, 0, 0, 0, 0, 0, 0, ramo, alumnoFind);
-						
+
+						if ((notaDAO.crud().count() > 0) || notaDAO.crud().count() != 0) {
+							idNota = notaDAO.crud().count() + 1;
+						}
+
+						nota = new Nota(idNota, 0, 0, 0, 0, 0, 0, 0, 0, semestreUno, ramo, alumnoFind);
+
 						notaDAO.crud().save(nota);
+
 					}
-					
-					//exito
+
+					for (Ramo ramo : cursoFind.getRamos()) {
+
+						if ((notaDAO.crud().count() > 0) || notaDAO.crud().count() != 0) {
+							idNota = notaDAO.crud().count() + 1;
+						}
+
+						nota = new Nota(idNota, 0, 0, 0, 0, 0, 0, 0, 0, semestreDos, ramo, alumnoFind);
+
+						notaDAO.crud().save(nota);
+
+					}
+
+					// exito
 					respuestaServidor = 200;
 
 				}
-				
+
 			} else {
-				
+
 				// el alumno existe
 				respuestaServidor = 100;
 

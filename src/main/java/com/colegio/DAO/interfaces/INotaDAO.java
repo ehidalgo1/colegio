@@ -8,11 +8,16 @@ import org.springframework.data.repository.query.Param;
 
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Nota;
+import com.colegio.entity.Semestre;
 
 public interface INotaDAO extends CrudRepository<Nota, Long>{
 
-	List<Nota> findByAlumno(Alumno alumno);
+	List<Nota> findByAlumnoAndSemestre(Alumno alumno, Semestre semestre);
 	
 	@Query(value = "SELECT * FROM NOTA WHERE RAMO_ID_RAMO = :idRamo AND ALUMNO_ID_ALUMNO = :idAlumno", nativeQuery = true)
-	Nota buscarPorIdAlumnoAndIdNota(@Param("idRamo") Long idRamo, @Param("idAlumno") Long idAlumno);
+	Nota buscarNotasPorAlumno(@Param("idRamo") Long idRamo, @Param("idAlumno") Long idAlumno);
+	
+	@Query(value = "SELECT * FROM NOTA WHERE RAMO_ID_RAMO = :idRamo AND ALUMNO_ID_ALUMNO = :idAlumno AND SEMESTRE_ID_SEMESTRE = :idSemestre", nativeQuery = true)
+	Nota buscarPorIdAlumnoAndIdNotaAndIdSemestre(@Param("idRamo") Long idRamo, @Param("idAlumno") Long idAlumno, @Param("idSemestre") Long idSemestre);
+	
 }
