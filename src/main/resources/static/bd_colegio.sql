@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-02-2020 a las 00:53:28
+-- Tiempo de generación: 26-02-2020 a las 05:15:19
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -316,10 +316,10 @@ CREATE TABLE `nota` (
 
 INSERT INTO `nota` (`ID_NOTA`, `SEMESTRE_ID_SEMESTRE`, `RAMO_ID_RAMO`, `ALUMNO_ID_ALUMNO`, `NOTA_1`, `NOTA_2`, `NOTA_3`, `NOTA_4`, `NOTA_5`, `NOTA_6`, `NOTA_7`, `NOTA_8`) VALUES
 (1, 1, 10, 19, 4.9, 6.4, 5.8, 6.5, 7, 0, 6.6, 6.5),
-(2, 1, 9, 19, 7, 7, 7, 7, 7, 0, 0, 0),
+(2, 1, 9, 19, 7, 7, 7, 7, 7, 7, 7, 7),
 (3, 1, 7, 19, 6, 6, 6, 6.5, 0, 0, 0, 0),
-(4, 1, 5, 19, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 1, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 1, 5, 19, 7, 7, 7, 7, 7, 7, 7, 6.5),
+(5, 1, 3, 19, 7, 7, 7, 7, 7, 7, 7, 0),
 (6, 1, 2, 19, 0, 0, 0, 0, 0, 0, 0, 0),
 (7, 1, 1, 19, 0, 0, 0, 0, 0, 0, 0, 0),
 (8, 1, 4, 19, 7, 7, 7, 7, 7, 7, 0, 0),
@@ -389,6 +389,13 @@ CREATE TABLE `personalidad` (
   `POSITIVO_PARTICIPATIVO` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `OBSERVACIONES` text COLLATE utf8_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `personalidad`
+--
+
+INSERT INTO `personalidad` (`ID_PERSONALIDAD`, `SEMESTRE_ID_SEMESTRE`, `ALUMNO_ID_ALUMNO`, `HIGIENE_PRESENTACION`, `AUTOESTIMA_VALORACION`, `SUPERA_ERRORES`, `TOLERA_FRUSTRACIONES`, `CONTROLA_IMPULSOS`, `INTEGRA_GRUPO`, `RESUELVE_PROBLEMAS_INTERPERSONALES`, `RESPETA_NORMAS_CONVIVENCIA`, `ACTITUD_RESPETUOSA`, `PREOCUPACION_SOLIDARIDAD`, `RESPETA_BIENES`, `TRABAJO_CONTINUO`, `RESPONSABLE_DEBERES`, `PARTICIPA_CLASES`, `DEMUESTRA_EMPRENDIMIENTO`, `INTERCAMBIA_CONOCIMIENTOS`, `SUPERA_DIFICULTADES`, `TRABAJA_CLASES`, `ACATA_NORMAS`, `DISPUESTO_CONCENTRADO`, `POSITIVO_PARTICIPATIVO`, `OBSERVACIONES`) VALUES
+(4, 1, 19, 'G', 'G', 'S', 'S', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'sadafdsdgfsfss');
 
 -- --------------------------------------------------------
 
@@ -591,7 +598,7 @@ ALTER TABLE `nota`
 -- AUTO_INCREMENT de la tabla `personalidad`
 --
 ALTER TABLE `personalidad`
-  MODIFY `ID_PERSONALIDAD` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PERSONALIDAD` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
