@@ -16,7 +16,7 @@
 <body>
 <c:import url="menu.jsp"></c:import>
     <div class="container">
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <h4>Mis alumnos</h4>
             </div>

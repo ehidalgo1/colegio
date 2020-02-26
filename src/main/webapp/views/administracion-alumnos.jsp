@@ -17,7 +17,7 @@
 	<c:import url="menu.jsp"></c:import>
 	<div class="preloader" hidden="false"></div>
 	<div class="container">
-		<div class="card">
+		<div class="card shadow">
 			<div class="card-header">
 				<h4>Administración alumnos</h4>
 			</div>

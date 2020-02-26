@@ -22,7 +22,7 @@
 <body>
 	<c:import url="menu.jsp"></c:import>
 	<div class="container-fluid">
-		<div class="card">
+		<div class="card shadow">
 			<div class="card-header">
 				<h4>Informe Personalidad</h4>
 			</div>
@@ -56,7 +56,7 @@
 					Informe</button>
 			</div>
 		</div>
-		<div class="card mt-3" id="informe-personalidad" hidden="true">
+		<div class="card shadow mt-5" id="informe-personalidad" hidden="true">
 			<div class="card-header">
 
 			</div>
@@ -245,8 +245,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script

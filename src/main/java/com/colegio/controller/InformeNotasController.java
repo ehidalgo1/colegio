@@ -1,12 +1,17 @@
 package com.colegio.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.Console;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -202,5 +207,55 @@ public class InformeNotasController {
 		return respuestaServidor;
 	}
 	
+	@GetMapping("/exporta-informe-notas/{run}/{semestre}")
+	public void exportarNotasPdf(@PathVariable String run, @PathVariable String semestre, HttpSession session) {
+		
+		Alumno alumnoFind = null;
+		Semestre semestreFind = null;
+		
+		try {
+			
+			alumnoFind = alumDAO.crud().findByRun(run);
+			
+			if (alumnoFind!=null) {
+				
+				int nroSemestre = Integer.parseInt(semestre);
+				
+				semestreFind = semDAO.crud().findBySemestre(nroSemestre);
+				
+				if (semestreFind!=null) {
+					
+					notaDAO.descargarPDF(alumnoFind, semestreFind, session);
+					
+					
+					
+				}
+				
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+	
+	
+//	@GetMapping("/exportar-seguimiento-embarque-excel")
+//	public ResponseEntity<InputStreamResource> exportarNotasPdf() throws IOException{
+//		
+//		ByteArrayInputStream stream = embDAO.exportarExcel();
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		
+//		headers.add("Content-Disposition", "attachment; filename=seguimiento_embarque.xlsx");
+//		
+//		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(stream));
+//		
+//	}
 	
 }

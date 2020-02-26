@@ -23,7 +23,7 @@
 <body>
 	<c:import url="menu.jsp"></c:import>
 	<div class="container-fluid">
-		<div class="card">
+		<div class="card shadow">
 			<div class="card-header">
 				<h4>Notas Alumno</h4>
 			</div>
@@ -57,8 +57,10 @@
 					Notas</button>
 			</div>
 		</div>
-		<div class="card mt-5" hidden="true" id="detalle-notas">
-			<div class="card-header"></div>
+		<div class="card shadow mt-5" hidden="true" id="detalle-notas">
+			<div class="card-header" align="right">
+			<button id="btn-descargar-notas" class="btn btn-success">Descargar</button>
+			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-hover mt-3">

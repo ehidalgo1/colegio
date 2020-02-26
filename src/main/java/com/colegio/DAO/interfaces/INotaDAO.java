@@ -19,5 +19,8 @@ public interface INotaDAO extends CrudRepository<Nota, Long>{
 	
 	@Query(value = "SELECT * FROM NOTA WHERE RAMO_ID_RAMO = :idRamo AND ALUMNO_ID_ALUMNO = :idAlumno AND SEMESTRE_ID_SEMESTRE = :idSemestre", nativeQuery = true)
 	Nota buscarPorIdAlumnoAndIdNotaAndIdSemestre(@Param("idRamo") Long idRamo, @Param("idAlumno") Long idAlumno, @Param("idSemestre") Long idSemestre);
+
+	@Query(value = "SELECT * FROM NOTA WHERE ALUMNO_ID_ALUMNO = :idAlumno AND SEMESTRE_ID_SEMESTRE = :idSemestre", nativeQuery = true)
+	List<Nota> buscarNotasPorAlumnoAndSemestre(@Param("idAlumno") Long idAlumno, @Param("idSemestre") int idSemestre);
 	
 }

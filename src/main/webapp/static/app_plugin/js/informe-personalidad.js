@@ -1,4 +1,13 @@
-$("#btn-ver-informe").click(function() {
+
+
+
+$('#seleccion-semestre').change(function () {
+
+  $("#informe-personalidad").prop("hidden", true);
+
+});
+
+$("#btn-ver-informe").click(function () {
   var semestre = $("#seleccion-semestre").val();
   var runAlumno = $("#run-alumno").text();
   var parte = runAlumno.split(" ");
@@ -15,8 +24,8 @@ function obtenerInformePersonalidad(run, semestre) {
   $.ajax({
     url: "/obtener-personalidad-alumno/" + run + "/" + semestre,
     type: "get",
-    beforeSend: function() {},
-    success: function(request) {
+    beforeSend: function () { },
+    success: function (request) {
       var respuesta = JSON.stringify(request);
       var objeto = JSON.parse(respuesta);
 
@@ -24,9 +33,7 @@ function obtenerInformePersonalidad(run, semestre) {
       var td = "";
       var elemento = "";
 
-      $("td").each(function(i, item) {
-
-        
+      $("td").each(function (i, item) {
 
         switch (contador) {
           case 1:
@@ -120,44 +127,88 @@ function obtenerInformePersonalidad(run, semestre) {
 
         if (i === contador) {
 
-            $(this).html(elemento);
-  
-            contador = contador + 3;
-            
-          }
+          $(this).html(elemento);
+
+          contador = contador + 3;
+
+        }
 
       });
     },
-    error: function() {
+    error: function () {
       console.log("error al obtener el informe");
     },
-    complete: function() {}
+    complete: function () { }
   });
 }
 
-$("#btn-primer-semestre").click(function() {
+$("#btn-primer-semestre").click(function () {
   $(this).attr("hidden", true);
   $("#btn-guardar-informe-personalidad").prop("hidden", false);
   $("#btn-guardar-primer-semestre").prop("hidden", false);
   var input =
     "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
   var contador = 1;
+  var valorTextArea = "";
 
-  $("td").each(function(i, item) {
+  $("td").each(function (i, item) {
+
+
     if (contador === i) {
+
+
+      switch (item.textContent) {
+        case "S":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S' selected>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          break;
+        case "G":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G' selected>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          break;
+        case "O":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O' selected>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          break;
+        case "N":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N' selected>Nunca</option><option value='NO'>No Observable</option></select>";
+          break;
+        case "NO":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO' selected>No Observable</option></select>";
+          break;
+        case "":
+          input =
+            "<select class='form-control' id='selection-respuesta'><option value='' selected>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          break;
+
+        default:
+          break;
+      }
+
+
       if (i === 64) {
+        valorTextArea = item.textContent;
+
         input =
           "<textarea class='form-control' id='comentario' rows='3'></textarea>";
+          
       }
 
       $(this).html(input);
 
       contador = contador + 3;
     }
+
   });
+
+  $('#comentario').val(valorTextArea);
+
+
 });
 
-$("#btn-guardar-primer-semestre").click(function() {
+$("#btn-guardar-primer-semestre").click(function () {
   var input = "";
   var semestre = $("#seleccion-semestre").val();
   var campoRun = $("#run-alumno").text();
@@ -170,16 +221,16 @@ $("#btn-guardar-primer-semestre").click(function() {
 
   var fd = new FormData();
 
-  $('select').each(function(i, item) {
+  $('select').each(function (i, item) {
     input = item.value;
 
-    if(i>0){
-        
-        fd.append("campo_" + i, input);
+    if (i > 0) {
+
+      fd.append("campo_" + i, input);
 
     }
 
-    
+
   });
 
   var comentario = $("#comentario").val();
@@ -190,26 +241,26 @@ $("#btn-guardar-primer-semestre").click(function() {
     url: "/guardar-informe-personalidad/" + run + "/" + semestre,
     type: "post",
     data: fd,
-    beforeSend: function() {},
-    success: function(request) {
+    beforeSend: function () { },
+    success: function (request) {
       if (request === 200) {
       }
     },
-    error: function() {
+    error: function () {
       console.log("error al guardar los datos primer semestre");
     },
-    complete: function() {},
+    complete: function () { },
     cache: false,
     contentType: false,
     processData: false
   });
 });
 
-$("#btn-segundo-semestre").click(function() {
+$("#btn-segundo-semestre").click(function () {
   var input = "<input class='form-control' type='text'></input>";
   var contador = 3;
 
-  $("td").each(function(i, item) {
+  $("td").each(function (i, item) {
     console.log(item);
 
     if (contador === i) {

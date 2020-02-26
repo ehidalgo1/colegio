@@ -184,3 +184,39 @@ function guardarNotas(i) {
   });
 
 };
+
+
+$('#btn-descargar-notas').click(function(){
+
+
+  var semestre = $('#seleccion-semestre').val();
+  var runAlumno = $('#run-alumno').text();
+  var parte = runAlumno.split(" ");
+  var run = parte[1];
+
+
+  $.ajax({
+    url: '/exporta-informe-notas/'+run+'/'+semestre,
+    type: 'get',
+    beforeSend: function () {
+
+    },
+    success: function (request) {
+
+      if (request === 200) {
+        console.log("exito");
+
+      }
+
+    },
+    error: function () {
+      console.log("error");
+
+    },
+    complete: function () {
+
+    }
+  });
+
+
+});
