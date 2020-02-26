@@ -30,15 +30,24 @@ public class HomeController {
 		try {
 			
 			profe = (Profesor) session.getAttribute("usuario");
+			
+			if (profe!=null) {
+				
+			
 
 			model.addAttribute("profesor", profe);
 			
 			pagina = "home";
+			
+			}else {
+				
+				pagina = "redirect:login";
+			}
 
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			pagina = "login";
+			pagina = "redirect:login";
 			
 		}
 

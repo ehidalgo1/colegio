@@ -24,7 +24,7 @@
 	<div class="container-fluid">
 		<div class="card">
 			<div class="card-header">
-				<h4>Notas Alumno</h4>
+				<h4>Informe Personalidad</h4>
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -58,7 +58,7 @@
 		</div>
 		<div class="card mt-3" id="informe-personalidad" hidden="true">
 			<div class="card-header">
-				<h4>Informe personalidad</h4>
+
 			</div>
 			<div class="card-body">
 				<div>

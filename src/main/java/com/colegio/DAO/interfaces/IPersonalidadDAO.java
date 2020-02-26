@@ -11,7 +11,7 @@ public interface IPersonalidadDAO extends CrudRepository<Personalidad, Long>{
 
 	Personalidad findByAlumno(Alumno alumno);
 	
-	@Query(value = "SELECT * FROM PERSONALIDAD WHERE ALUMNO_ID_ALUMNO = :idAlumno",nativeQuery = true)
-	Personalidad buscarPorIdAlumno(@Param("idAlumno") Long idAlumno);
+	@Query(value = "SELECT * FROM PERSONALIDAD WHERE ALUMNO_ID_ALUMNO = :idAlumno AND SEMESTRE_ID_SEMESTRE = :idSemestre",nativeQuery = true)
+	Personalidad buscarPorIdAlumnoAndIdSemestre(@Param("idAlumno") Long idAlumno, @Param("idSemestre") int idSemestre);
 	
 }
