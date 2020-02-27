@@ -3,6 +3,8 @@ package com.colegio.controller;
 import java.io.ByteArrayInputStream;
 import java.io.Console;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,124 +40,122 @@ public class InformeNotasController {
 
 	@Autowired
 	private AlumnoDAO alumDAO;
-	
+
 	@Autowired
 	private NotaDAO notaDAO;
-	
+
 	@Autowired
 	private RamoDAO ramoDAO;
-	
+
 	@Autowired
 	private SemestreDAO semDAO;
-	
+
 	@GetMapping("/informe-notas/{token}")
-	public String goInformeNotas(@PathVariable String token,Model model, HttpSession session) {
-		
+	public String goInformeNotas(@PathVariable String token, Model model, HttpSession session) {
+
 		Profesor profe = null;
 		String pagina = "";
 		Alumno alumnoFind = null;
 		List<Nota> listaNotasPorAlumno = null;
 		List<Semestre> listaSemestres = null;
 		Semestre semestreFind = null;
-		
+
 		try {
-			
+
 			alumnoFind = alumDAO.crud().findByToken(token);
-			
-			if (alumnoFind!=null) {
-				
+
+			if (alumnoFind != null) {
+
 				semestreFind = semDAO.crud().findBySemestre(1);
-				
+
 				listaNotasPorAlumno = notaDAO.crud().findByAlumnoAndSemestre(alumnoFind, semestreFind);
-				
+
 				listaSemestres = (List<Semestre>) semDAO.crud().findAll();
-				
-				model.addAttribute("listaSemestres",listaSemestres);
+
+				model.addAttribute("listaSemestres", listaSemestres);
 				model.addAttribute("alumno", alumnoFind);
-				model.addAttribute("listanotas",listaNotasPorAlumno);
-				
+				model.addAttribute("listanotas", listaNotasPorAlumno);
+
 				profe = (Profesor) session.getAttribute("usuario");
 
 				model.addAttribute("profesor", profe);
-				
-				
+
 				pagina = "informe-notas";
-				
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			pagina = "home";
 		}
-		
+
 		return pagina;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/obtener-notas-alumno/{run}/{semestre}")
-	public List<Nota> listaNotasAlumnoSemestre(@PathVariable String run, @PathVariable String semestre){
-		
+	public List<Nota> listaNotasAlumnoSemestre(@PathVariable String run, @PathVariable String semestre) {
+
 		List<Nota> listaNotas = null;
 		Alumno alumnoFind = null;
 		Semestre semestreFind = null;
-		
+
 		try {
-			
+
 			alumnoFind = alumDAO.crud().findByRun(run);
-			
-			if (alumnoFind!=null) {
-				
+
+			if (alumnoFind != null) {
+
 				int numeroSemestre = Integer.parseInt(semestre);
-				
+
 				semestreFind = semDAO.crud().findBySemestre(numeroSemestre);
-				
-				if (semestreFind!=null) {
-					
+
+				if (semestreFind != null) {
+
 					listaNotas = notaDAO.crud().findByAlumnoAndSemestre(alumnoFind, semestreFind);
-					
+
 				}
-				
+
 			}
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			listaNotas = new ArrayList<Nota>();
 		}
-		
+
 		return listaNotas;
-		
+
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/guardar-notas/{run}/{semestre}")
-	public Integer guardarNotasAlumno(@PathVariable String run, @PathVariable Long semestre,@RequestBody List<String> listaNotas) {
-		
+	public Integer guardarNotasAlumno(@PathVariable String run, @PathVariable Long semestre,
+			@RequestBody List<String> listaNotas) {
+
 		int respuestaServidor = 0;
 		Alumno alumnoFind = null;
 		Nota notaFind = null;
 		Ramo ramoFind = null;
-		
+
 		try {
-			
+
 			if (!listaNotas.isEmpty()) {
-				
+
 				alumnoFind = alumDAO.crud().findByRun(run);
-				
-				if (alumnoFind!=null) {
-					
+
+				if (alumnoFind != null) {
+
 					String nombreRamo = listaNotas.get(0);
-					
+
 					ramoFind = ramoDAO.crud().findByNombre(nombreRamo);
-					
-					if (ramoFind!=null) {
-						
-						notaFind = notaDAO.crud().buscarPorIdAlumnoAndIdNotaAndIdSemestre(ramoFind.getIdRamo(), alumnoFind.getIdAlumno(), semestre);
-						
+
+					if (ramoFind != null) {
+
+						notaFind = notaDAO.crud().buscarPorIdAlumnoAndIdNotaAndIdSemestre(ramoFind.getIdRamo(),
+								alumnoFind.getIdAlumno(), semestre);
+
 						double nota1 = 0;
 						double nota2 = 0;
 						double nota3 = 0;
@@ -161,7 +164,7 @@ public class InformeNotasController {
 						double nota6 = 0;
 						double nota7 = 0;
 						double nota8 = 0;
-						
+
 						nota1 = Double.parseDouble(listaNotas.get(1));
 						nota2 = Double.parseDouble(listaNotas.get(2));
 						nota3 = Double.parseDouble(listaNotas.get(3));
@@ -170,9 +173,7 @@ public class InformeNotasController {
 						nota6 = Double.parseDouble(listaNotas.get(6));
 						nota7 = Double.parseDouble(listaNotas.get(7));
 						nota8 = Double.parseDouble(listaNotas.get(8));
-						
-						
-						
+
 						notaFind.setNota1(nota1);
 						notaFind.setNota2(nota2);
 						notaFind.setNota3(nota3);
@@ -181,67 +182,75 @@ public class InformeNotasController {
 						notaFind.setNota6(nota6);
 						notaFind.setNota7(nota7);
 						notaFind.setNota8(nota8);
-						
+
 						notaDAO.crud().save(notaFind);
-						
-						
+
 						respuestaServidor = 200;
-						
-						
+
 					}
-					
-					
-					
+
 				}
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			respuestaServidor = 500;
 		}
-		
-		
+
 		return respuestaServidor;
 	}
-	
+
 	@GetMapping("/exporta-informe-notas/{run}/{semestre}")
-	public void exportarNotasPdf(@PathVariable String run, @PathVariable String semestre, HttpSession session) {
-		
+	public ResponseEntity<Resource> exportarNotasPdf(@PathVariable String run, @PathVariable String semestre,
+			HttpSession session) {
+
 		Alumno alumnoFind = null;
 		Semestre semestreFind = null;
-		
+		Resource resource = null;
+
 		try {
-			
+
 			alumnoFind = alumDAO.crud().findByRun(run);
-			
-			if (alumnoFind!=null) {
-				
+
+			if (alumnoFind != null) {
+
 				int nroSemestre = Integer.parseInt(semestre);
-				
+
 				semestreFind = semDAO.crud().findBySemestre(nroSemestre);
-				
-				if (semestreFind!=null) {
-					
+
+				if (semestreFind != null) {
+
 					notaDAO.descargarPDF(alumnoFind, semestreFind, session);
+
+					String rutaPdf = ".//src//main//webapp//static//archivos//Informe_notas.pdf";
+
+					Path path = Paths.get(rutaPdf);
+					
+
+					resource = new UrlResource(path.toUri());
 					
 					
-					
+
 				}
-				
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
 		
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType("application/pdf"))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
+		
+
 	}
-	
-	
+
 //	@GetMapping("/exportar-seguimiento-embarque-excel")
 //	public ResponseEntity<InputStreamResource> exportarNotasPdf() throws IOException{
 //		
@@ -254,5 +263,5 @@ public class InformeNotasController {
 //		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(stream));
 //		
 //	}
-	
+
 }

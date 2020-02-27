@@ -194,29 +194,7 @@ $('#btn-descargar-notas').click(function(){
   var parte = runAlumno.split(" ");
   var run = parte[1];
 
-
-  $.ajax({
-    url: '/exporta-informe-notas/'+run+'/'+semestre,
-    type: 'get',
-    beforeSend: function () {
-
-    },
-    success: function (request) {
-
-      if (request === 200) {
-        console.log("exito");
-
-      }
-
-    },
-    error: function () {
-      console.log("error");
-
-    },
-    complete: function () {
-
-    }
-  });
+  $(location).attr('href','/exporta-informe-notas/'+run+'/'+semestre);
 
 
 });

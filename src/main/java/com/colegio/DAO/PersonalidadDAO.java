@@ -51,8 +51,10 @@ public class PersonalidadDAO {
 				Document document = new Document(PageSize.A4);
 				document.addAuthor("colegio");
 				document.addTitle("Informe Notas");
+				
+				String rutaPdf = ".//src//main//webapp//static//archivos//Informe_personalidad.pdf";
 
-				PdfWriter.getInstance(document, new FileOutputStream("Informe_personalidad.pdf"));
+				PdfWriter.getInstance(document, new FileOutputStream(rutaPdf));
 				document.open();
 
 				// Creating an ImageData object

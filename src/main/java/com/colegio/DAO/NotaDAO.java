@@ -67,7 +67,9 @@ public class NotaDAO {
 				document.addAuthor("colegio");
 				document.addTitle("Informe Notas");
 
-				PdfWriter.getInstance(document, new FileOutputStream("Informe_notas.pdf"));
+				String rutaPdf = ".//src//main//webapp//static//archivos//Informe_notas.pdf";
+				
+				PdfWriter.getInstance(document, new FileOutputStream(rutaPdf));
 				document.open();
 
 				// Creating an ImageData object

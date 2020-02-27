@@ -1,10 +1,17 @@
 package com.colegio.controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -207,10 +214,11 @@ public class InformePersonalidadController {
 	
 	
 	@GetMapping("/exporta-informe-personalidad/{run}/{semestre}")
-	public void exportarNotasPdf(@PathVariable String run, @PathVariable String semestre, HttpSession session) {
+	public ResponseEntity<Resource> exportarNotasPdf(@PathVariable String run, @PathVariable String semestre, HttpSession session) {
 		
 		Alumno alumnoFind = null;
 		Semestre semestreFind = null;
+		Resource resource = null;
 		
 		try {
 			
@@ -226,16 +234,28 @@ public class InformePersonalidadController {
 					
 					personDAO.descargarPDF(alumnoFind, semestreFind, session);
 					
+					String rutaPdf = ".//src//main//webapp//static//archivos//Informe_personalidad.pdf";
+
+					Path path = Paths.get(rutaPdf);
+					
+
+					resource = new UrlResource(path.toUri());
+					
 
 				}
-				
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+		
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType("application/pdf"))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.body(resource);
 		
 		
 	}
