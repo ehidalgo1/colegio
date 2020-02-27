@@ -15,9 +15,12 @@
   </head>
   <body>
     <div class="contenedor-login">
-      <div class="card shadow pt-3 pb-3 rounded-lg">
-        <div class="card-body">
-          <h4 class="card-title mb-3 text-center">Iniciar Sesión</h4>
+      <div class="card shadow">
+        <div class="card-body mt-0">
+        <div class="container p-0 m-0" align="center">
+        <img alt="" src="static/imagenes/logo_colegio_login.png">
+        </div>
+          <h4 class="card-title mb-3 mt-2 text-center">Iniciar Sesión</h4>
           <div class="form">
             <form action="/home" method="post" class="form-login">
               <div class="row">
