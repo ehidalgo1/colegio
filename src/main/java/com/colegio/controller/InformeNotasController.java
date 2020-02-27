@@ -161,7 +161,6 @@ public class InformeNotasController {
 						double nota6 = 0;
 						double nota7 = 0;
 						double nota8 = 0;
-						double promedioFinal = 0;
 						
 						nota1 = Double.parseDouble(listaNotas.get(1));
 						nota2 = Double.parseDouble(listaNotas.get(2));
@@ -238,8 +237,6 @@ public class InformeNotasController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		
 		
 		
 	}

@@ -57,8 +57,8 @@
 			</div>
 		</div>
 		<div class="card shadow mt-5" id="informe-personalidad" hidden="true">
-			<div class="card-header">
-
+			<div class="card-header" align="right">
+				<button id="btn-descargar-personalidad" class="btn btn-success">Descargar</button>
 			</div>
 			<div class="card-body">
 				<div>
@@ -67,10 +67,8 @@
 							<tr>
 								<th>AREA PERSONAL Y AFECTIVA</th>
 								<th>#</th>
-								<th><button id="btn-primer-semestre"
-										class="btn btn-sm btn-secondary rounded-circle">+</button>
-									<button id="btn-guardar-primer-semestre" hidden="true"
-										class="btn btn-sm btn-success rounded-circle">Ok</button></th>
+								<th><button id="btn-editar-personalidad"
+										class="btn btn-sm btn-secondary rounded-circle">+</button></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -239,7 +237,8 @@
 						<div class="col-md-12" align="right">
 							<hr class="my-2">
 							<button id="btn-guardar-informe-personalidad"
-								class="btn btn-primary btn-lg mt-3" hidden="true">Guardar Cambios</button>
+								class="btn btn-primary btn-lg mt-3" hidden="true">Guardar
+								Cambios</button>
 						</div>
 					</div>
 				</div>

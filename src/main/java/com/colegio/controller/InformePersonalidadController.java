@@ -185,6 +185,8 @@ public class InformePersonalidadController {
 					personDAO.crud().save(personalidadFind);
 					
 					
+					respuestaServidor = 200;
+					
 					
 				}
 
@@ -201,5 +203,48 @@ public class InformePersonalidadController {
 		return respuestaServidor;
 
 	}
+	
+	
+	
+	@GetMapping("/exporta-informe-personalidad/{run}/{semestre}")
+	public void exportarNotasPdf(@PathVariable String run, @PathVariable String semestre, HttpSession session) {
+		
+		Alumno alumnoFind = null;
+		Semestre semestreFind = null;
+		
+		try {
+			
+			alumnoFind = alumDAO.crud().findByRun(run);
+			
+			if (alumnoFind!=null) {
+				
+				int nroSemestre = Integer.parseInt(semestre);
+				
+				semestreFind = semDAO.crud().findBySemestre(nroSemestre);
+				
+				if (semestreFind!=null) {
+					
+					personDAO.descargarPDF(alumnoFind, semestreFind, session);
+					
+
+				}
+				
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
