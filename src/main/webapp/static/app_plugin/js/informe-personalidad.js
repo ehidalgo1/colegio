@@ -145,29 +145,29 @@ $("#btn-editar-personalidad").click(function() {
   $("td").each(function(i, item) {
     if (contador === i) {
       switch (item.textContent) {
-        case "S":
+        case "SIEMPRE":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S' selected>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='SIEMPRE' selected>Siempre</option><option value='GENERALMENTE'>Generalmente</option><option value='OCACIONALMENTE'>Ocacionalmente</option><option value='NUNCA'>Nunca</option><option value='NO OBSERVABLE'>No Observable</option></select>";
           break;
-        case "G":
+        case "GENERALMENTE":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G' selected>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='SIEMPRE'>Siempre</option><option value='GENERALMENTE' selected>Generalmente</option><option value='OCACIONALMENTE'>Ocacionalmente</option><option value='NUNCA'>Nunca</option><option value='NO OBSERVABLE'>No Observable</option></select>";
           break;
-        case "O":
+        case "OCACIONALMENTE":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O' selected>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='SIEMPRE'>Siempre</option><option value='GENERALMENTE'>Generalmente</option><option value='OCACIONALMENTE' selected>Ocacionalmente</option><option value='NUNCA'>Nunca</option><option value='NO OBSERVABLE'>No Observable</option></select>";
           break;
-        case "N":
+        case "NUNCA":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N' selected>Nunca</option><option value='NO'>No Observable</option></select>";
+          "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='SIEMPRE'>Siempre</option><option value='GENERALMENTE'>Generalmente</option><option value='OCACIONALMENTE'>Ocacionalmente</option><option value='NUNCA' selected>Nunca</option><option value='NO OBSERVABLE'>No Observable</option></select>";
           break;
-        case "NO":
+        case "NO OBSERVABLE":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO' selected>No Observable</option></select>";
+          "<select class='form-control' id='selection-respuesta'><option value=''>Seleccione</option><option value='SIEMPRE'>Siempre</option><option value='GENERALMENTE'>Generalmente</option><option value='OCACIONALMENTE'>Ocacionalmente</option><option value='NUNCA'>Nunca</option><option value='NO OBSERVABLE' selected>No Observable</option></select>";
           break;
         case "":
           input =
-            "<select class='form-control' id='selection-respuesta'><option value='' selected>Seleccione</option><option value='S'>Siempre</option><option value='G'>Generalmente</option><option value='O'>Ocacionalmente</option><option value='N'>Nunca</option><option value='NO'>No Observable</option></select>";
+          "<select class='form-control' id='selection-respuesta'><option value='' selected>Seleccione</option><option value='SIEMPRE'>Siempre</option><option value='GENERALMENTE'>Generalmente</option><option value='OCACIONALMENTE'>Ocacionalmente</option><option value='NUNCA'>Nunca</option><option value='NO OBSERVABLE'>No Observable</option></select>";
           break;
 
         default:
@@ -196,10 +196,6 @@ $("#btn-guardar-informe-personalidad").click(function() {
   var campoRun = $("#run-alumno").text();
   var parte = campoRun.split(" ");
   var run = parte[1];
-
-  console;
-
-  var listaPersonalidadPrimer = [];
 
   var fd = new FormData();
 
@@ -233,6 +229,8 @@ $("#btn-guardar-informe-personalidad").click(function() {
             valorInput = item.options[item.selectedIndex].value;
 
             $(this).replaceWith(valorInput);
+
+            $('#btn-editar-personalidad').prop('hidden',false);
 
           }
 

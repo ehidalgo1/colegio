@@ -25,6 +25,7 @@ import com.colegio.DAO.PersonalidadDAO;
 import com.colegio.DAO.SemestreDAO;
 import com.colegio.entity.Alumno;
 import com.colegio.entity.Personalidad;
+import com.colegio.entity.Profesor;
 import com.colegio.entity.Semestre;
 
 @Controller
@@ -43,6 +44,7 @@ public class InformePersonalidadController {
 	public String goInformePersonalidad(@PathVariable String token, HttpSession session, Model model) {
 
 		String pagina = "informe-personalidad";
+		Profesor profesor = null;
 		Alumno alumnoFind = null;
 		Personalidad personalidadPorAlumno = null;
 		List<Semestre> listaSemestres = null;
@@ -58,6 +60,10 @@ public class InformePersonalidadController {
 				model.addAttribute("listaSemestres", listaSemestres);
 
 				model.addAttribute("alumno", alumnoFind);
+				
+				profesor = (Profesor) session.getAttribute("usuario");
+				
+				model.addAttribute("profesor",profesor);
 
 				pagina = "informe-personalidad";
 

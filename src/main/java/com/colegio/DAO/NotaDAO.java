@@ -2,6 +2,10 @@ package com.colegio.DAO;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -82,10 +86,17 @@ public class NotaDAO {
 				
 				imagenFirma.setAlignment(Element.ALIGN_RIGHT);
 
+
+				Format dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				
+				Paragraph fechaActual = new Paragraph(dateFormat.format(new Date()));
+				fechaActual.setAlignment(Element.ALIGN_RIGHT);
+				
+				Calendar calendario = Calendar.getInstance();
 				
 				Paragraph header = new Paragraph("SANTA MARIA DE PAINE\r\n" + 
 						"INFORME DE NOTAS SEMESTRAL\r\n" + 
-						"ENSEÑANZA BASICA – "+semestre.getNombre());
+						""+semestre.getNombre() +" "+ calendario.get(Calendar.YEAR));
 				
 				header.setAlignment(Element.ALIGN_CENTER);
 				
@@ -155,7 +166,7 @@ public class NotaDAO {
 
 				
 				//construllendo el pdf
-				
+				document.add(fechaActual);
 				document.add(imagenLogo);
 				document.add(header);
 				document.add(saltoDeLinea);

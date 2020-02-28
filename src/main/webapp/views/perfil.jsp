@@ -32,7 +32,8 @@
 					</div>
 					<div class=col-md-6>
 						<div class="row">
-							<label class="col-md-12">ESPECIALIDAD (RAMO): ${profesor.especialidad}</label>
+							<label class="col-md-12">Ramo: ${profesor.especialidad}</label>
+							<label class="col-md-12">Total alumnos: ${listaAlumnos.size()}</label>
 						</div>
 					</div>
 				</div>

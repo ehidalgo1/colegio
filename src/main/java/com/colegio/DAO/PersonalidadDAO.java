@@ -1,6 +1,10 @@
 package com.colegio.DAO;
 
 import java.io.FileOutputStream;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,12 +33,11 @@ public class PersonalidadDAO {
 
 	@Autowired
 	private IPersonalidadDAO ipersonalDAO;
-	
+
 	public IPersonalidadDAO crud() {
 		return this.ipersonalDAO;
 	}
-	
-	
+
 	public void descargarPDF(Alumno alumno, Semestre semestre, HttpSession session) {
 
 		Personalidad personalidad = null;
@@ -42,7 +45,8 @@ public class PersonalidadDAO {
 
 		try {
 
-			personalidad = this.ipersonalDAO.buscarPorIdAlumnoAndIdSemestre(alumno.getIdAlumno(), semestre.getIdSemestre());
+			personalidad = this.ipersonalDAO.buscarPorIdAlumnoAndIdSemestre(alumno.getIdAlumno(),
+					semestre.getIdSemestre());
 
 			if (personalidad != null) {
 
@@ -51,39 +55,45 @@ public class PersonalidadDAO {
 				Document document = new Document(PageSize.A4);
 				document.addAuthor("colegio");
 				document.addTitle("Informe Notas");
-				
+
 				String rutaPdf = ".//src//main//webapp//static//archivos//Informe_personalidad.pdf";
 
 				PdfWriter.getInstance(document, new FileOutputStream(rutaPdf));
 				document.open();
 
+				
+
+				Format dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				
+				Paragraph fechaActual = new Paragraph(dateFormat.format(new Date()));
+				fechaActual.setAlignment(Element.ALIGN_RIGHT);
+				
+				Calendar calendario = Calendar.getInstance();
+				
 				// Creating an ImageData object
 				String rutaImagenlogo = ".//src//main//webapp//static//imagenes//logo_colegio.png";
 				String rutaImagenFirma = ".//src//main//webapp//static//imagenes//firma_colegio.png";
-				
-				
+
 				Image imagenLogo = Image.getInstance(rutaImagenlogo);
 				Image imagenFirma = Image.getInstance(rutaImagenFirma);
-				
+
 				imagenFirma.setAlignment(Element.ALIGN_RIGHT);
 
-				
-				Paragraph header = new Paragraph("SANTA MARIA DE PAINE\r\n" + 
-						"INFORME DE PERSONALIDAD SEMESTRAL\r\n" + 
-						"ENSEÑANZA BASICA – "+semestre.getNombre());
-				
+				Paragraph header = new Paragraph("SANTA MARIA DE PAINE\r\n" + "INFORME DE PERSONALIDAD SEMESTRAL\r\n"
+						+ "" + semestre.getNombre() +" "+calendario.get(Calendar.YEAR));
+
 				header.setAlignment(Element.ALIGN_CENTER);
-				
+
 				Paragraph paraRun = new Paragraph(
 						"RUN: " + alumno.getRun() + "                                            Profesor(a) jefe: "
 								+ profe.getNombre() + " " + profe.getApellido());
 				Paragraph paraNombre = new Paragraph(
 						"Nombre: " + alumno.getNombre() + " " + alumno.getApellidoP() + " " + alumno.getApellidoM());
 				Paragraph paraCurso = new Paragraph("Curso: " + alumno.getCurso().getNumeroCurso());
-				Paragraph footer = new Paragraph("_______________________                                                            _______________________\r\n"+
-												"      PROFESOR(A) JEFE						                                                                            DIRECTOR(A)");
-				
-				
+				Paragraph footer = new Paragraph(
+						"_______________________                                                            _______________________\r\n"
+								+ "      PROFESOR(A) JEFE						                                                                            DIRECTOR(A)");
+
 				Paragraph saltoDeLinea = new Paragraph(" ");
 
 				PdfPTable table = new PdfPTable(2);
@@ -104,7 +114,7 @@ public class PersonalidadDAO {
 				table.addCell(personalidad.getToleraFrustraciones());
 				table.addCell("Controla sus impulsos");
 				table.addCell(personalidad.getControlaImpulsos());
-				
+
 				table.addCell("AREA SOCIAL");
 				table.addCell("#");
 				table.addCell("Se integra a su grupo de pares");
@@ -119,8 +129,7 @@ public class PersonalidadDAO {
 				table.addCell(personalidad.getPreocupacionSolidaridad());
 				table.addCell("Respeta los bienes de uso común");
 				table.addCell(personalidad.getRespetaBienes());
-				
-				
+
 				table.addCell("AREA ACADEMICA");
 				table.addCell("#");
 				table.addCell("Desarrolla el trabajo escolar en forma sistémica y continua");
@@ -141,17 +150,16 @@ public class PersonalidadDAO {
 				table.addCell(personalidad.getAcataNormas());
 				table.addCell("Se observa dispuesto y concentrado en la tarea que realiza");
 				table.addCell(personalidad.getDispuestoConcentrado());
-				table.addCell("Manifiesta una actitud positiva y participativa frente a las diferentes actividades que ofrece el colegio");
+				table.addCell(
+						"Manifiesta una actitud positiva y participativa frente a las diferentes actividades que ofrece el colegio");
 				table.addCell(personalidad.getPositivoParticipativo());
-				
 
 				PdfPTable tableObservaciones = new PdfPTable(1);
 				tableObservaciones.addCell("OBSERVACIONES");
 				tableObservaciones.addCell(personalidad.getObservaciones());
 
-				
-				//construllendo el pdf
-				
+				// construllendo el pdf
+				document.add(fechaActual);
 				document.add(imagenLogo);
 				document.add(header);
 				document.add(saltoDeLinea);
@@ -160,14 +168,13 @@ public class PersonalidadDAO {
 				document.add(paraNombre);
 				document.add(paraCurso);
 				document.add(saltoDeLinea);
-				
-				//iniciando tabla
+
+				// iniciando tabla
 				document.add(table);
 				document.add(saltoDeLinea);
 				document.add(tableObservaciones);
-				//end tabla
-				
-				
+				// end tabla
+
 				document.add(saltoDeLinea);
 				document.add(saltoDeLinea);
 				document.add(saltoDeLinea);
@@ -186,5 +193,4 @@ public class PersonalidadDAO {
 
 	}
 
-	
 }

@@ -105,7 +105,7 @@ function editarNotas(i) {
 
       nota = item.textContent;
 
-      input = "<input id='nota-" + i + "' type='text' class='form-control' />";
+      input = "<input id='nota-" + i + "' name='nota' type='text' class='form-control' />";
 
 
       $(this).html(input);
@@ -145,10 +145,14 @@ function guardarNotas(i) {
       valorCelda = $("#nota-" + i + "").val();
     }
 
+    
+
     lista.push(valorCelda);
 
     if (i < 9) {
+
       $(this).html(valorCelda);
+
     }
 
   });
@@ -186,6 +190,8 @@ function guardarNotas(i) {
 };
 
 
+
+
 $('#btn-descargar-notas').click(function(){
 
 
@@ -198,3 +204,5 @@ $('#btn-descargar-notas').click(function(){
 
 
 });
+
+

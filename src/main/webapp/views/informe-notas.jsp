@@ -59,7 +59,7 @@
 		</div>
 		<div class="card shadow mt-5" hidden="true" id="detalle-notas">
 			<div class="card-header" align="right">
-			<button id="btn-descargar-notas" class="btn btn-success">Descargar</button>
+				<button id="btn-descargar-notas" class="btn btn-success">Descargar</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -90,6 +90,9 @@
 	<c:import url="footer.jsp"></c:import>
 	<script
 		src="${pageContext.request.contextPath}/static/js/jquery-3.4.1.min.js"></script>
+	<script language="javascript" type="text/javascript"
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

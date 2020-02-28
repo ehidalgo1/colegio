@@ -15,8 +15,22 @@
 </head>
 <body>
 	<c:import url="menu.jsp"></c:import>
-	<div class="container">
-	<div class="promedio-general">
+	<div class="container-fluid">
+	<div class="card shadow">
+	<div class="card-header">
+	</div>
+	<div class="card-body">
+	<table class="table table-hover">
+	<thead>
+	<tr>
+	<th>Alumno</th>
+	<th>Promedio</th>
+	</tr>
+	</thead>
+	<tbody id="tabla-promedio-alumnos">
+	</tbody>
+	</table>
+	</div>
 	</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>

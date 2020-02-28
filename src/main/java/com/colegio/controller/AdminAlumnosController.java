@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -190,5 +192,82 @@ public class AdminAlumnosController {
 		return respuestaServidor;
 
 	}
+	
+	
+	@ResponseBody
+	@GetMapping("obtener-datos-alumno/{token}")
+	public Alumno obtenerDatosAlumno(@PathVariable String token) {
+		Alumno alumnoFind = null;
+		
+		try {
+			
+			alumnoFind = alumnoDAO.crud().findByToken(token);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			alumnoFind = new Alumno();
+		}
+		
+		
+		return alumnoFind;
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("guardar-cambios-alumno/{token}")
+	public Integer guardarCambiosAlumno(@PathVariable String token, @RequestBody Alumno alum) {
+		
+		int respuestaServidor =  0;
+		Alumno alumnoFind = null;
+		Curso cursoFind = null;
+		
+		try {
+			
+			alumnoFind = alumnoDAO.crud().findByToken(token);
+			
+			if (alumnoFind!=null) {
+				
+				cursoFind = cursoDAO.crud().findByToken(alum.getCurso().getToken());
+				
+				if (cursoFind!=null) {
+					
+					alumnoFind.setRun(alum.getRun());
+					alumnoFind.setNombre(alum.getNombre());
+					alumnoFind.setApellidoP(alum.getApellidoP());
+					alumnoFind.setApellidoM(alum.getApellidoM());
+					alumnoFind.setCurso(cursoFind);
+					
+					alumnoDAO.crud().save(alumnoFind);
+					
+					respuestaServidor = 200;
+					
+					
+				}
+				
+			}
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			respuestaServidor = 500;
+		}
+		
+		
+		return respuestaServidor;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -109,6 +110,84 @@ public class AdminProfesoresController {
 		
 		
 	}
+	
+	
+	@ResponseBody
+	@GetMapping("obtener-datos-profesor/{token}")
+	public Profesor obtenerProfesor(@PathVariable String token) {
+		Profesor profesorFind = null;
+		
+		try {
+			
+			profesorFind = profDAO.crud().findByToken(token);
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			profesorFind = new Profesor();
+		}
+		
+		return profesorFind;
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/guardar-cambios-profesor/{token}")
+	public Integer guardarDatosProfesor(@PathVariable String token, @RequestBody Profesor profe) {
+		
+		int respuestaServidor = 0;
+		Profesor profesorFind = null;
+		Curso cursoFind = null;
+		
+		try {
+			
+			profesorFind = profDAO.crud().findByToken(token);
+			
+			if (profesorFind!=null) {
+				
+				cursoFind = cursoDAO.crud().findByToken(profe.getCurso().getToken());
+				
+				if (cursoFind!=null) {
+				
+					
+					
+					profesorFind.setRun(profe.getRun());
+					profesorFind.setNombre(profe.getNombre());
+					profesorFind.setApellido(profe.getApellido());
+					profesorFind.setUsuario(profe.getUsuario());
+					profesorFind.setEspecialidad(profe.getEspecialidad());
+										
+					profesorFind.setCurso(cursoFind);
+					
+
+					profDAO.crud().save(profesorFind);
+					
+					respuestaServidor = 200;
+					
+					
+					
+					
+				}
+				
+				
+				
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			respuestaServidor = 500;
+		}
+		
+		
+		return respuestaServidor;
+	}
+	
+	
 	
 	@ResponseBody
 	@PostMapping("/guardar-profesor")

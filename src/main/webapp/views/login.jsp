@@ -16,12 +16,12 @@
   <body>
     <div class="contenedor-login">
       <div class="card shadow">
-        <div class="card-body mt-0">
-        <div class="container p-0 m-0" align="center">
+        <div class="card-body mt-2">
+        <div class="container pb-2 m-0" align="center">
         <img alt="" src="static/imagenes/logo_colegio_login.png">
         </div>
-          <h4 class="card-title mb-3 mt-2 text-center">Iniciar Sesión</h4>
-          <div class="form">
+        <hr class="my-2">
+          <div class="form mt-5">
             <form action="/home" method="post" class="form-login">
               <div class="row">
                 <div class="form-group col-md-12">
@@ -42,7 +42,7 @@
                     placeholder="ContraseÃ±a"
                   />
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12 mt-3">
                   <input
                     type="submit"
                     name="iniciar-sesion"

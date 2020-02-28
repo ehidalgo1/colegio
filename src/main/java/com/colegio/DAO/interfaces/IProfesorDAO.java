@@ -11,4 +11,7 @@ public interface IProfesorDAO extends CrudRepository<Profesor, Long>{
 	
 	Profesor findByNombreAndApellido(String nombre, String apellido);
 	
+	Profesor findByToken(String token);
+	
+	
 }
