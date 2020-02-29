@@ -20,7 +20,7 @@ $('.form-login').submit(function () {
         },
         success: function (request) {
 
-            if (request === 300) {
+            if (request === 200) {
                 var url = "/home";
                 window.location.replace(url);
             }else if(request === 100){
