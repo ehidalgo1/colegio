@@ -1,3 +1,6 @@
+function mensajeArgegado() { swal("Profesor Agregado", "Se ha agregado el profesor exitosamente", "success") };
+function mensajeEditado() { swal("Profesor Editado", "Se ha actualizado el profesor exitosamente", "success") };
+
 
 $(document).ready(function () {
 
@@ -35,7 +38,7 @@ function obtenerListaRamos() {
                 lista = "<option value="+objeto[i].nombre+">" + objeto[i].nombre + "</option>";
 
                 $('#especialidad').append(lista);
-                $('#especialidad-editar').append(lista);
+                $('#especialidadeditar').append(lista);
             }
 
         },
@@ -70,7 +73,7 @@ function obtenerListaCursos(){
                 lista = "<option value="+objeto[i].token+">"+objeto[i].numeroCurso+"</option>";
 
                 $('#curso').append(lista);
-                $('#curso-editar').append(lista);
+                $('#cursoeditar').append(lista);
 
             }
         },
@@ -127,6 +130,20 @@ function obtenerListaProfesores() {
 
 function editarProfesor(token){
 
+    cargarDatosProfesor(token);
+
+    $('.form-editar-profesor').submit(function(event){
+        event.preventDefault();
+
+        guardarCambiosProfesor(token);
+
+    });
+
+
+};
+
+function cargarDatosProfesor(token){
+
     $.ajax({
         url: 'obtener-datos-profesor/'+token,
         type: 'get',
@@ -137,14 +154,14 @@ function editarProfesor(token){
             var respuesta = JSON.stringify(request);
             var objeto = JSON.parse(respuesta);
 
-            $('#run-editar').val(objeto.run);
-            $('#nombre-editar').val(objeto.nombre);
-            $('#apellido-editar').val(objeto.apellido);
-            $('#usuario-editar').val(objeto.usuario);
-            $('#especialidad-editar').val(objeto.especialidad);
-            $('#curso-editar').val(objeto.curso.token);
+            $('#runeditar').val(objeto.run);
+            $('#nombreeditar').val(objeto.nombre);
+            $('#apellidoeditar').val(objeto.apellido);
+            $('#usuarioeditar').val(objeto.usuario);
+            $('#especialidadeditar').val(objeto.especialidad);
+            $('#cursoeditar').val(objeto.curso.token);
 
-            $('#btn-form-editar-profesor').attr('onClick',"guardarCambiosProfesor('"+objeto.token+"')");
+            // $('#btn-form-editar-profesor').attr('onClick',"guardarCambiosProfesor('"+objeto.token+"')");
 
             $('#modal-editar-profesor').modal('show');
 
@@ -157,18 +174,20 @@ function editarProfesor(token){
         }
     });
 
-
 };
+
+
+
 
 function guardarCambiosProfesor(token){
 
-    var run = $('#run-editar').val();
-    var nombre = $('#nombre-editar').val();
-    var apellido = $('#apellido-editar').val();
-    var usuario = $('#usuario-editar').val();
-    var especialidad = $('#especialidad-editar').val();
-    var tokenCurso = $('#curso-editar').val();
-    var nombreRol = $('#rol-editar').val();
+    var run = $('#runeditar').val();
+    var nombre = $('#nombreeditar').val();
+    var apellido = $('#apellidoeditar').val();
+    var usuario = $('#usuarioeditar').val();
+    var especialidad = $('#especialidadeditar').val();
+    var tokenCurso = $('#cursoeditar').val();
+    var nombreRol = $('#roleditar').val();
 
 
     var profesor = {
@@ -201,7 +220,11 @@ function guardarCambiosProfesor(token){
 
             if(request===200){
 
+
+
                 obtenerListaProfesores();
+
+                mensajeEditado();
 
                 console.log('se han guardado los cambios');
 
@@ -263,6 +286,7 @@ $('#form-agregar-profesor').submit(function (event) {
 
             if (request === 200) {
 
+                mensajeArgegado();
                 obtenerListaProfesores();
                 $('#modal-agregar-profesor').modal('hide');
             } else if (request === 100) {
@@ -392,6 +416,70 @@ $('.form-agregar-profesor').validate({
         required: "Seleccione la especialidad"
       },
       curso: {
+        required: "Seleccione un curso",
+      }
+  },
+});
+
+
+$('.form-editar-profesor').validate({
+    rules: {
+      runeditar: {
+          required: true,
+          minlength: 9,
+          maxlength: 10
+      },
+
+      nombreeditar: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellidoeditar: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      usuarioeditar: {
+          required: true,
+          minlength: 8,
+          maxlength: 30,
+          email: true,
+      },
+      especialidadeditar:{
+          required: true
+      },
+      cursoeditar: {
+        required: true,
+      }
+    },
+    messages: {
+      runeditar: {
+          required: "Ingrese el RUN",
+          minlength: "Debe contener a lo menos 9 digitos",
+          maxlength: "No debe exeder los 10 digitos"
+      },
+
+      nombreeditar: {
+          required: "Ingrese nombre",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellidoeditar: {
+          required: "Ingrese el apellido",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      usuarioeditar: {
+        required: "Ingrese el usuario",
+        minlength: "Debe contener 8 caracteres como minimo",
+        maxlength: "Debe contener 30 caracteres como maximo",
+        email: "El usuario no cumple con el formato (exemplo@colegio.cl)",
+    },
+    especialidadeditar:{
+        required: "Seleccione la especialidad"
+      },
+      cursoeditar: {
         required: "Seleccione un curso",
       }
   },

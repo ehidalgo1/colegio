@@ -107,6 +107,8 @@
 				<div class="modal-header">
 					<h4>Editar alumno</h4>
 				</div>
+				<form action="" method="post" id="form-editar-alumno"
+					class="form-editar-alumno">
 				<div class="modal-body">
 					<div class="form p-4">
 						<div class="form-group row">
@@ -148,9 +150,9 @@
 					</div>
 				</div>
 				<div class="modal-footer text-rigth">
-					<button class="btn btn-success" id="btn-form-editar-alumno">Guardar
-						cambios</button>
+						<button class="btn btn-success" id="btn-form-editar-alumno">Guardar cambios</button>
 				</div>
+				</form>
 			</div>
 		</div>
 		<!--end modal editar-->

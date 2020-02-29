@@ -1,3 +1,6 @@
+function mensajeArgegado() { swal("Alumno Agregado", "Se ha agregado el alumno exitosamente", "success") };
+function mensajeEditado() { swal("Alumno Editado", "Se ha actualizado el alumno exitosamente", "success") };
+
 
 $(document).ready(function(){
     $('#preloader').prop('hidden',true);
@@ -122,6 +125,7 @@ $('.form-agregar-alumno').submit(function(event){
         },
         success: function(request){
             
+            mensajeArgegado();
             llenarTablaAlumnos();
             $('#modal-agregar-alumno').modal('hide');
             
@@ -150,6 +154,13 @@ $('.form-agregar-alumno').submit(function(event){
 function editarAlumno(token){
 
     cargarDatosAlumno(token);
+
+    
+$('.form-editar-alumno').submit(function(event){
+    event.preventDefault();
+
+    guardarCambiosAlumno(token);
+});
 
 };
 
@@ -189,14 +200,13 @@ function cargarDatosAlumno(token){
 
 
 
-
 function guardarCambiosAlumno(token){
 
     var run = $('#runeditar').val();
     var nombre = $('#nombreeditar').val();
     var apellidoP = $('#apellido_peditar').val();
     var apellidoM = $('#apellido_meditar').val();
-    var tokenCurso = $('#lista-cursoeditar').val();
+    var tokenCurso = $('#cursoeditar').val();
 
     var alumno = {
         'run' : run.toUpperCase(),
@@ -225,6 +235,7 @@ function guardarCambiosAlumno(token){
 
                 console.log('Se guardo correctamente');
 
+                mensajeEditado();
                 llenarTablaAlumnos();
                 $('#modal-editar-alumno').modal('hide');
 

@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administración profesores</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
@@ -33,7 +34,7 @@
 							<th>APELLIDO</th>
 							<th>ESPECIALIDAD</th>
 							<th>USUARIO</th>
-							<th>CONTRASEÑ‘A</th>
+							<th>CONTRASEÑA</th>
 							<th>CURSO</th>
 							<th>OPCIONES</th>
 						</tr>
@@ -132,49 +133,51 @@
 				<div class="modal-header">
 					<h4>Editar profesor</h4>
 				</div>
+				<form action="" method="post" id="form-editar-profesor"
+					class="form-editar-profesor">
 				<div class="modal-body">
 					<div class="form p-4">
 						<div class="form-group row">
-							<label for="run-editar" class="col-md-3">RUN</label>
+							<label for="runeditar" class="col-md-3">RUN</label>
 							<div class="col-md-7">
-								<input type="text" name="run-editar" id="run-editar"
+								<input type="text" name="runeditar" id="runeditar"
 									class="form-control" placeholder="12345678-0">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="nombre-editar" class="col-md-3">Nombre</label>
+							<label for="nombreeditar" class="col-md-3">Nombre</label>
 							<div class="col-md-7">
-								<input type="text" name="nombre-editar" id="nombre-editar"
+								<input type="text" name="nombreeditar" id="nombreeditar"
 									class="form-control" placeholder="Primer nombre">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="apellido-editar" class="col-md-3">Apellido</label>
+							<label for="apellidoeditar" class="col-md-3">Apellido</label>
 							<div class="col-md-7">
-								<input type="text" name="apellido-editar" id="apellido-editar"
+								<input type="text" name="apellidoeditar" id="apellidoeditar"
 									class="form-control" placeholder="Primer apellido">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="usuario-editar" class="col-md-3">Usuario</label>
+							<label for="usuarioeditar" class="col-md-3">Usuario</label>
 							<div class="col-md-7">
-								<input type="email" name="usuario-editar" id="usuario-editar"
+								<input type="email" name="usuarioeditar" id="usuarioeditar"
 									class="form-control" placeholder="usuario@correo.cl">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="especialidad-editar" class="col-md-3">Especialidad</label>
+							<label for="especialidadeditar" class="col-md-3">Especialidad</label>
 							<div class="col-md-7">
-								<select name="especialidad-editar" id="especialidad-editar"
+								<select name="especialidadeditar" id="especialidadeditar"
 									class="form-control">
 
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="curso-editar" class="col-md-3">Curso</label>
+							<label for="cursoeditar" class="col-md-3">Curso</label>
 							<div class="col-md-7">
-								<select name="curso-editar" id="curso-editar"
+								<select name="cursoeditar" id="cursoeditar"
 									class="form-control">
 
 								</select>
@@ -183,7 +186,7 @@
 						<div class="form-group row">
 							<label for="rol-editar" class="col-md-3">Rol</label>
 							<div class="col-md-7">
-								<select id="rol-editar" name="rol-editar" class="form-control">
+								<select id="roleditar" name="roleditar" class="form-control">
 									<option value="PROFESOR">Profesor</option>
 									<option value="ADMINISTRADOR">Administrador</option>
 								</select>
@@ -192,10 +195,11 @@
 					</div>
 				</div>
 				<div class="modal-footer text-rigth">
-					<button class="btn btn-success" id="btn-form-editar-profesor">Guardar
-						cambios</button>
-
+					<div class="modal-footer text-rigth">
+						<button class="btn btn-success" id="btn-form-editar-profesor">Guardar cambios</button>
+					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 		<!--end modal editar-->
