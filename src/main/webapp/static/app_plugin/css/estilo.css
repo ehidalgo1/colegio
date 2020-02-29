@@ -19,6 +19,15 @@ body{
 *
 */
 
+/*
+* PARA JQUERY VALIDATE
+*/
+
+.error{
+  color: red;
+}
+
+
 .vertical-nav {
   min-width: 17rem;
   width: 17rem;

@@ -168,6 +168,7 @@ function guardarCambiosProfesor(token){
     var usuario = $('#usuario-editar').val();
     var especialidad = $('#especialidad-editar').val();
     var tokenCurso = $('#curso-editar').val();
+    var nombreRol = $('#rol-editar').val();
 
 
     var profesor = {
@@ -178,11 +179,14 @@ function guardarCambiosProfesor(token){
         'usuario': usuario.toUpperCase(),
         'curso': {
             'token': tokenCurso
+        },
+        'rol':{
+            'nombreRol':nombreRol
         }
     };
 
 
-    if((run.length>8 && run.length<11) && nombre.length>=3 && apellido.length>=3 && usuario.length>=6 && curso!=='' && especialidad!==''){
+    if((run.length>8 && run.length<11) && nombre.length>=3 && apellido.length>=3 && usuario.length>=6 && curso!=='' && especialidad!=='' && nombreRol!==''){
 
     $.ajax({
         url: 'guardar-cambios-profesor/'+token,
@@ -217,33 +221,6 @@ function guardarCambiosProfesor(token){
 };
 
 
-function mensajeEliminarProfesor(token){
-
-    $('#modal-eliminar').modal('show');
-
-};
-
-function eliminarProfesor(token){
-
-    $.ajax({
-        url: '',
-        type: '',
-        beforeSend: function(){
-
-        },
-        success: function(){
-
-        },
-        error: function(){
-
-        },
-        complete: function(){
-            
-        }
-    });
-
-};
-
 $('#form-agregar-profesor').submit(function (event) {
     event.preventDefault();
 
@@ -254,6 +231,7 @@ $('#form-agregar-profesor').submit(function (event) {
     var password = $('#password').val();
     var especialidad = $('#especialidad').val();
     var tokenCurso = $('#curso').val();
+    var nombreRol = $('#rol').val();
 
     var profesor = {
         'run': run.toUpperCase(),
@@ -264,10 +242,13 @@ $('#form-agregar-profesor').submit(function (event) {
         'password': password,
         'curso': {
             'token': tokenCurso
+        },
+        'rol':{
+            'nombreRol':nombreRol
         }
     };
 
-    if((run.length>8 && run.length<11) && run.includes("-") && nombre.length>=3 && apellido.length>=3 && usuario.length>=6 && curso!=='' && especialidad!==''){
+    if((run.length>8 && run.length<11) && run.includes("-") && nombre.length>=3 && apellido.length>=3 && usuario.length>=6 && curso!=='' && especialidad!=='' && nombreRol!==''){
 
     $.ajax({
         url: '/guardar-profesor',
@@ -304,4 +285,114 @@ $('#form-agregar-profesor').submit(function (event) {
 
 }//end if
 
+});
+
+function mensajeEliminarProfesor(token) {
+    swal({
+        title: "Eliminar profesor",
+        text: "Se eliminar\u00e1 el profesor, \u00BFDesea continuar?.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+        function (isConfirm) {
+            if (isConfirm) {
+                accionEliminarProfesor(token);
+            }
+        });
+};
+
+function accionEliminarProfesor(token){
+
+    $.ajax({
+        url: 'eliminar-profesor/'+token,
+        type: 'post',
+        beforeSend: function(){
+
+        },
+        success: function(request){
+
+            if (request===200) {
+                obtenerListaProfesores();
+                swal("Profesor Borrado", "Se ha eliminado el profesor", "success");
+            }
+
+        },
+        error: function(){
+
+        },
+        complete: function(){
+
+        }
+
+    });
+
+};
+
+
+$('.form-agregar-profesor').validate({
+    rules: {
+      run: {
+          required: true,
+          minlength: 9,
+          maxlength: 10
+      },
+
+      nombre: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellido: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      usuario: {
+          required: true,
+          minlength: 8,
+          maxlength: 30,
+          email: true,
+      },
+      especialidad:{
+          required: true
+      },
+      curso: {
+        required: true,
+      }
+    },
+    messages: {
+      run: {
+          required: "Ingrese el RUN",
+          minlength: "Debe contener a lo menos 9 digitos",
+          maxlength: "No debe exeder los 10 digitos"
+      },
+
+      nombre: {
+          required: "Ingrese nombre",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellido: {
+          required: "Ingrese el apellido",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      usuario: {
+        required: "Ingrese el usuario",
+        minlength: "Debe contener 8 caracteres como minimo",
+        maxlength: "Debe contener 30 caracteres como maximo",
+        email: "El usuario no cumple con el formato (exemplo@colegio.cl)",
+    },
+    especialidad:{
+        required: "Seleccione la especialidad"
+      },
+      curso: {
+        required: "Seleccione un curso",
+      }
+  },
 });

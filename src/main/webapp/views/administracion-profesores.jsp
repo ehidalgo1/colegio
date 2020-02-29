@@ -11,6 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administración profesores</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+<link href="static\plugins\sweetalert\css\sweetalert.css"
+	rel="stylesheet" />
 <link href="static/app_plugin/css/estilo.css" rel="stylesheet" />
 </head>
 
@@ -101,7 +103,15 @@
 									</select>
 								</div>
 							</div>
-
+							<div class="form-group row">
+								<label for="rol" class="col-md-3">Rol</label>
+								<div class="col-md-7">
+									<select id="rol" name="rol" class="form-control">
+										<option value="PROFESOR">Profesor</option>
+										<option value="ADMINISTRADOR">Administrador</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="modal-footer text-rigth">
@@ -170,7 +180,15 @@
 								</select>
 							</div>
 						</div>
-
+						<div class="form-group row">
+							<label for="rol-editar" class="col-md-3">Rol</label>
+							<div class="col-md-7">
+								<select id="rol-editar" name="rol-editar" class="form-control">
+									<option value="PROFESOR">Profesor</option>
+									<option value="ADMINISTRADOR">Administrador</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer text-rigth">
@@ -202,6 +220,8 @@
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="static/js/jquery-3.4.1.min.js"></script>
+	<script src="static/js/jquery.validate.min.js"></script>
+	<script src="static\plugins\sweetalert\js\sweetalert.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

@@ -60,8 +60,18 @@ public class AdminAlumnosController {
 				profe = (Profesor) session.getAttribute("usuario");
 
 				model.addAttribute("profesor", profe);
+				
+				if (profe.getRol().getNombreRol().equals("ADMINISTRADOR")) {
+					
+					pagina = "administracion-alumnos";
+					
+				}else {
+					
+					pagina = "redirect:home";
+					
+				}
 
-				pagina = "administracion-alumnos";
+				
 
 			} else {
 				pagina = "redirect:login";
@@ -260,6 +270,33 @@ public class AdminAlumnosController {
 		
 		return respuestaServidor;
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/eliminar-alumno/{token}")
+	public Integer eliminarAlumno(@PathVariable String token) {
+		int respuestaServidor = 0;
+		Alumno alumnoFind = null;
+		
+		try {
+			
+			alumnoFind = alumnoDAO.crud().findByToken(token);
+			
+			if (alumnoFind!=null) {
+				
+				alumnoDAO.crud().delete(alumnoFind);
+				
+				respuestaServidor = 200;
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			respuestaServidor = 500;
+		}
+		
+		return respuestaServidor;
 	}
 	
 	

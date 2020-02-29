@@ -1,3 +1,7 @@
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Vertical navbar -->
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <div class="vertical-nav bg-white shadow" id="sidebar">
@@ -19,18 +23,25 @@
                 Home
             </a>
     </li>
+    
+    
+    <c:if test="${profesor.rol.idRol==2}">
+    
     <li class="nav-item">
       <a href="/administracion-alumnos" class="nav-link text-dark font-italic">
                 <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
                 Administración alumnos
             </a>
     </li>
+   
     <li class="nav-item">
       <a href="/administracion-profesores" class="nav-link text-dark font-italic">
                 <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
                 Administración profesores
             </a>
     </li>
+    
+     </c:if>
   </ul>
 
   <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Perfil</p>

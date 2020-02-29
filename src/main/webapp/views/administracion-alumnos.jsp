@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>administración alumnos</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+<link href="static\plugins\sweetalert\css\sweetalert.css" rel="stylesheet" />
 <link href="static/app_plugin/css/estilo.css" rel="stylesheet" />
 </head>
 <body>
@@ -83,8 +84,7 @@
 							<div class="form-group row">
 								<label for="curso" class="col-md-3">Curso</label>
 								<div class="col-md-7">
-									<select name="lista-curso" id="lista-curso"
-										class="form-control">
+									<select name="curso" id="curso" class="form-control">
 
 									</select>
 								</div>
@@ -110,42 +110,37 @@
 				<div class="modal-body">
 					<div class="form p-4">
 						<div class="form-group row">
-							<label for="run-editar" class="col-md-3">RUN</label>
+							<label for="runeditar" class="col-md-3">RUN</label>
 							<div class="col-md-7">
-								<input type="text" name="run-editar" id="run-editar"
+								<input type="text" name="runeditar" id="runeditar"
 									class="form-control" placeholder="12345678-0">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="nombre-editar" class="col-md-3">Nombre</label>
+							<label for="nombreeditar" class="col-md-3">Nombre</label>
 							<div class="col-md-7">
-								<input type="text" name="nombre-editar" id="nombre-editar"
+								<input type="text" name="nombreeditar" id="nombreeditar"
 									class="form-control" placeholder="Nombre">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="apellido_p-editar" class="col-md-3">Apellido
-								P</label>
+							<label for="apellido_peditar" class="col-md-3">Apellido P</label>
 							<div class="col-md-7">
-								<input type="text" name="apellido_p-editar"
-									id="apellido_p-editar" class="form-control"
-									placeholder="Primer apellido">
+								<input type="text" name="apellido_peditar" id="apellido_peditar"
+									class="form-control" placeholder="Primer apellido">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="apellido_m-editar" class="col-md-3">Apellido
-								M</label>
+							<label for="apellido_meditar" class="col-md-3">Apellido M</label>
 							<div class="col-md-7">
-								<input type="text" name="apellido_m-editar"
-									id="apellido_m-editar" class="form-control"
-									placeholder="Segundo apellido">
+								<input type="text" name="apellido_meditar" id="apellido_meditar"
+									class="form-control" placeholder="Segundo apellido">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="curso-editar" class="col-md-3">Curso</label>
+							<label for="cursoeditar" class="col-md-3">Curso</label>
 							<div class="col-md-7">
-								<select name="lista-curso-editar" id="lista-curso-editar"
-									class="form-control">
+								<select name="cursoeditar" id="cursoeditar" class="form-control">
 
 								</select>
 							</div>
@@ -153,7 +148,8 @@
 					</div>
 				</div>
 				<div class="modal-footer text-rigth">
-					<button class="btn btn-success" id="btn-form-editar-alumno">Guardar cambios</button>
+					<button class="btn btn-success" id="btn-form-editar-alumno">Guardar
+						cambios</button>
 				</div>
 			</div>
 		</div>
@@ -186,6 +182,8 @@
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="static/js/jquery-3.4.1.min.js"></script>
+	<script src="static/js/jquery.validate.min.js"></script>
+	<script src="static\plugins\sweetalert\js\sweetalert.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

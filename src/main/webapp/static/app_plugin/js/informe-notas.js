@@ -105,7 +105,7 @@ function editarNotas(i) {
 
       nota = item.textContent;
 
-      input = "<input id='nota-" + i + "' name='nota' type='text' class='form-control' />";
+      input = "<input id='nota-" + i + "' name='nota' type='number' class='form-control' />";
 
 
       $(this).html(input);
@@ -121,7 +121,11 @@ function editarNotas(i) {
 
 };
 
+
+
 function guardarNotas(i) {
+
+  
 
   var lista = [];
   var valorCelda = "";
@@ -143,11 +147,14 @@ function guardarNotas(i) {
     } else if (i < 9) {
 
       valorCelda = $("#nota-" + i + "").val();
+
+      
     }
+  
 
+      lista.push(valorCelda);
     
-
-    lista.push(valorCelda);
+   
 
     if (i < 9) {
 

@@ -28,14 +28,16 @@ function llenarSelectCurso(){
             var objeto = JSON.parse(respuesta);
             var seleccione = "<option value=''>Seleccione</option>";
             var lista = "";
-            $('#lista-curso').empty();
-            $('#lista-curso').append(seleccione);
+            $('#curso').empty();
+            $('#cursoeditar').empty();
+            $('#curso').append(seleccione);
+            $('#cursoeditar').append(lista);
             for (let i = 0; i < objeto.length; i++) {
 
                 lista = "<option value="+objeto[i].token+">"+objeto[i].numeroCurso+"</option>";
                 
-                $('#lista-curso').append(lista);
-                $('#lista-curso-editar').append(lista);
+                $('#curso').append(lista);
+                $('#cursoeditar').append(lista);
             }
 
         },
@@ -97,7 +99,7 @@ $('.form-agregar-alumno').submit(function(event){
     var nombre = $('#nombre').val();
     var apellido_p = $('#apellido_p').val();
     var apellido_m = $('#apellido_m').val();
-    var token_curso = $('#lista-curso').val();
+    var token_curso = $('#curso').val();
 
     formData = new FormData();
 
@@ -108,6 +110,8 @@ $('.form-agregar-alumno').submit(function(event){
     formData.append('token_curso',token_curso);
 
     console.log('enviando datos')
+
+    if((run.length>8 && run.length<11) && run.includes("-") && nombre.length>=3 && apellido_p.length>3 && apellido_m.length>3 && token_curso !== ''){
 
     $.ajax({
         url: '/guardar-alumno',
@@ -138,10 +142,19 @@ $('.form-agregar-alumno').submit(function(event){
 
     });
 
+}//end if
+
 });
 
 
 function editarAlumno(token){
+
+    cargarDatosAlumno(token);
+
+};
+
+
+function cargarDatosAlumno(token){
 
     $.ajax({
         url: 'obtener-datos-alumno/'+token,
@@ -153,11 +166,11 @@ function editarAlumno(token){
             var respuesta = JSON.stringify(request);
             var objeto = JSON.parse(respuesta);
 
-            $('#run-editar').val(objeto.run);
-            $('#nombre-editar').val(objeto.nombre);
-            $('#apellido_p-editar').val(objeto.apellidoP);
-            $('#apellido_m-editar').val(objeto.apellidoM);
-            $('#lista-curso-editar').val(objeto.curso.token);
+            $('#runeditar').val(objeto.run);
+            $('#nombreeditar').val(objeto.nombre);
+            $('#apellido_peditar').val(objeto.apellidoP);
+            $('#apellido_meditar').val(objeto.apellidoM);
+            $('#cursoeditar').val(objeto.curso.token);
 
             $('#btn-form-editar-alumno').attr('onClick',"guardarCambiosAlumno('"+objeto.token+"')");
 
@@ -175,13 +188,15 @@ function editarAlumno(token){
 };
 
 
+
+
 function guardarCambiosAlumno(token){
 
-    var run = $('#run-editar').val();
-    var nombre = $('#nombre-editar').val();
-    var apellidoP = $('#apellido_p-editar').val();
-    var apellidoM = $('#apellido_m-editar').val();
-    var tokenCurso = $('#lista-curso-editar').val();
+    var run = $('#runeditar').val();
+    var nombre = $('#nombreeditar').val();
+    var apellidoP = $('#apellido_peditar').val();
+    var apellidoM = $('#apellido_meditar').val();
+    var tokenCurso = $('#lista-cursoeditar').val();
 
     var alumno = {
         'run' : run.toUpperCase(),
@@ -230,3 +245,161 @@ function guardarCambiosAlumno(token){
 }//end if
 
 };
+
+function mensajeEliminarAlumno(token) {
+    swal({
+        title: "Eliminar alumno",
+        text: "Se eliminar\u00e1 el alumno, \u00BFDesea continuar?.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+        function (isConfirm) {
+            if (isConfirm) {
+                accionEliminarAlumno(token);
+            }
+        });
+};
+
+function accionEliminarAlumno(token){
+
+    $.ajax({
+        url: 'eliminar-alumno/'+token,
+        type: 'post',
+        beforeSend: function(){
+
+        },
+        success: function(request){
+
+            if (request===200) {
+                llenarTablaAlumnos();
+                swal("Alumno Borrado", "Se ha eliminado el alumno", "success");
+            }
+
+        },
+        error: function(){
+
+        },
+        complete: function(){
+
+        }
+
+    });
+
+};
+
+
+$('.form-agregar-alumno').validate({
+    rules: {
+      run: {
+          required: true,
+          minlength: 9,
+          maxlength: 10
+      },
+
+      nombre: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellido_p: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellido_m: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      curso: {
+        required: true,
+      }
+    },
+    messages: {
+      run: {
+          required: "Ingrese el RUN",
+          minlength: "Debe contener a lo menos 9 digitos",
+          maxlength: "No debe exeder los 10 digitos"
+      },
+
+      nombre: {
+          required: "Ingrese nombre",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellido_p: {
+          required: "Ingrese apellido paterno",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellido_m: {
+          required: "Ingrese apellido materno",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      curso: {
+        required: "Seleccione un curso",
+      }
+  },
+});
+
+
+$('.form-editar-alumno').validate({
+    rules: {
+      runeditar: {
+          required: true,
+          minlength: 9,
+          maxlength: 10
+      },
+
+      nombreeditar: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellido_peditar: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      apellido_meditar: {
+          required: true,
+          minlength: 3,
+          maxlength: 30
+      },
+      cursoeditar: {
+        required: true,
+      }
+    },
+    messages: {
+      runeditar: {
+          required: "Ingrese el RUN",
+          minlength: "Debe contener a lo menos 9 digitos",
+          maxlength: "No debe exeder los 10 digitos"
+      },
+
+      nombreeditar: {
+          required: "Ingrese nombre",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellido_peditar: {
+          required: "Ingrese apellido paterno",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      apellido_meditar: {
+          required: "Ingrese apellido materno",
+          minlength: "Debe contener a lo menos 3 caracteres",
+          maxlength: "Debe contener a lo mas 30 caracteres"
+      },
+      cursoeditar: {
+        required: "Seleccione un curso",
+      }
+  },
+});
