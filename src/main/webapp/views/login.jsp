@@ -39,7 +39,7 @@
                     name="password"
                     id="password"
                     class="form-control"
-                    placeholder="ContraseÃ±a"
+                    placeholder="Contraseña"
                   />
                 </div>
                 <div class="form-group col-md-12 mt-3">

@@ -239,7 +239,7 @@ $("#btn-guardar-informe-personalidad").click(function() {
         $('#comentario').replaceWith(comentario);
 
 
-        $('#btn-guardar-informe-personalidad').hide();
+        $('#btn-guardar-informe-personalidad').prop('hidden',true);
 
       }
 

@@ -20,9 +20,13 @@ $('.form-login').submit(function () {
         },
         success: function (request) {
 
-            if (request === 200) {
+            if (request === 300) {
                 var url = "/home";
                 window.location.replace(url);
+            }else if(request === 100){
+
+                alert("El usuario y o contrase\u00F1a no son validos");
+
             }
 
 

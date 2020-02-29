@@ -44,7 +44,7 @@ public class LoginController {
 	
 	@ResponseBody
 	@PostMapping("/iniciar-sesion")
-	public Integer iniciarSesion(@RequestParam("usuario")String usuario, @RequestParam("password") String password ,HttpSession session, Model model, RedirectAttributes redirectAtr) {
+	public Integer iniciarSesion(@RequestParam("usuario") String usuario, @RequestParam("password") String password ,HttpSession session, Model model, RedirectAttributes redirectAtr) {
 		
 		int respuestaServidor = 0;
 		Profesor profesorFind = null;
