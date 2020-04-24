@@ -61,7 +61,7 @@
 								<label for="new-password" class="col-md-3">Nueva
 									contraseña</label>
 								<div class="col-md-7">
-									<input type="text" name="new-password" id="new-password"
+									<input type="password" name="new-password" id="new-password"
 										class="form-control" placeholder="Nueva contraseña">
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 								<label for="confirm-password" class="col-md-3">Confirme
 									contraseña</label>
 								<div class="col-md-7">
-									<input type="text" name="confirm-password"
+									<input type="password" name="confirm-password"
 										id="confirm-password" class="form-control"
 										placeholder="Confirme nueva contraseña">
 								</div>
