@@ -265,4 +265,43 @@ public class AdminProfesoresController {
 		return respuestaServidor;
 	}
 
+	@ResponseBody
+	@PostMapping("/reestablecer-password/{token}")
+	public Integer reestablecerPasswordProfesor(@PathVariable String token) {
+		
+		int respuestaServidor = 0;
+		
+		Profesor profeFind = null;
+		
+		try {
+			
+			profeFind = profDAO.crud().findByToken(token);
+			
+			if(profeFind!=null) {
+				
+				String passwordDefaul = "colegio123";
+				
+				profeFind.setPassword(passwordDefaul);
+				
+				profDAO.crud().save(profeFind);
+				
+				respuestaServidor = 200;
+				
+			}else {
+				
+				respuestaServidor = 100;
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			profeFind = new Profesor();
+			respuestaServidor = 500;
+		}
+		
+		
+		return respuestaServidor;
+		
+	}
+	
 }

@@ -34,7 +34,6 @@
 							<th>APELLIDO</th>
 							<th>ESPECIALIDAD</th>
 							<th>USUARIO</th>
-							<th>CONTRASEÑA</th>
 							<th>CURSO</th>
 							<th>OPCIONES</th>
 						</tr>
@@ -135,92 +134,75 @@
 				</div>
 				<form action="" method="post" id="form-editar-profesor"
 					class="form-editar-profesor">
-				<div class="modal-body">
-					<div class="form p-4">
-						<div class="form-group row">
-							<label for="runeditar" class="col-md-3">RUN</label>
-							<div class="col-md-7">
-								<input type="text" name="runeditar" id="runeditar"
-									class="form-control" placeholder="12345678-0">
+					<div class="modal-body">
+						<div class="form p-4">
+							<div class="form-group row">
+								<label for="runeditar" class="col-md-3">RUN</label>
+								<div class="col-md-7">
+									<input type="text" name="runeditar" id="runeditar"
+										class="form-control" placeholder="12345678-0">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="nombreeditar" class="col-md-3">Nombre</label>
-							<div class="col-md-7">
-								<input type="text" name="nombreeditar" id="nombreeditar"
-									class="form-control" placeholder="Primer nombre">
+							<div class="form-group row">
+								<label for="nombreeditar" class="col-md-3">Nombre</label>
+								<div class="col-md-7">
+									<input type="text" name="nombreeditar" id="nombreeditar"
+										class="form-control" placeholder="Primer nombre">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="apellidoeditar" class="col-md-3">Apellido</label>
-							<div class="col-md-7">
-								<input type="text" name="apellidoeditar" id="apellidoeditar"
-									class="form-control" placeholder="Primer apellido">
+							<div class="form-group row">
+								<label for="apellidoeditar" class="col-md-3">Apellido</label>
+								<div class="col-md-7">
+									<input type="text" name="apellidoeditar" id="apellidoeditar"
+										class="form-control" placeholder="Primer apellido">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="usuarioeditar" class="col-md-3">Usuario</label>
-							<div class="col-md-7">
-								<input type="email" name="usuarioeditar" id="usuarioeditar"
-									class="form-control" placeholder="usuario@correo.cl">
+							<div class="form-group row">
+								<label for="usuarioeditar" class="col-md-3">Usuario</label>
+								<div class="col-md-7">
+									<input type="email" name="usuarioeditar" id="usuarioeditar"
+										class="form-control" placeholder="usuario@correo.cl">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="especialidadeditar" class="col-md-3">Especialidad</label>
-							<div class="col-md-7">
-								<select name="especialidadeditar" id="especialidadeditar"
-									class="form-control">
+							<div class="form-group row">
+								<label for="especialidadeditar" class="col-md-3">Especialidad</label>
+								<div class="col-md-7">
+									<select name="especialidadeditar" id="especialidadeditar"
+										class="form-control">
 
-								</select>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="cursoeditar" class="col-md-3">Curso</label>
-							<div class="col-md-7">
-								<select name="cursoeditar" id="cursoeditar"
-									class="form-control">
+							<div class="form-group row">
+								<label for="cursoeditar" class="col-md-3">Curso</label>
+								<div class="col-md-7">
+									<select name="cursoeditar" id="cursoeditar"
+										class="form-control">
 
-								</select>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<label for="rol-editar" class="col-md-3">Rol</label>
-							<div class="col-md-7">
-								<select id="roleditar" name="roleditar" class="form-control">
-									<option value="PROFESOR">Profesor</option>
-									<option value="ADMINISTRADOR">Administrador</option>
-								</select>
+							<div class="form-group row">
+								<label for="rol-editar" class="col-md-3">Rol</label>
+								<div class="col-md-7">
+									<select id="roleditar" name="roleditar" class="form-control">
+										<option value="PROFESOR">Profesor</option>
+										<option value="ADMINISTRADOR">Administrador</option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer text-rigth">
 					<div class="modal-footer text-rigth">
-						<button class="btn btn-success" id="btn-form-editar-profesor">Guardar cambios</button>
+						<div class="modal-footer text-rigth">
+							<button class="btn btn-success" id="btn-form-editar-profesor">Guardar
+								cambios</button>
+						</div>
 					</div>
-				</div>
 				</form>
 			</div>
 		</div>
 		<!--end modal editar-->
-		<!--modal eliminar -->
-		<div id="modal-eliminar" class="modal fade" tabindex="-1"
-			role="dialog" aria-labelledby="modal-eliminar" aria-hidden="true">
-			<div class="modal-dialog modal-md modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4>Eliminar profesor</h4>
-					</div>
-					<div class="modal-body"></div>
-					<div class="modal-footer text-rigth">
-						<button class="btn btn-success" id="btn-form-editar-profesor">Guardar
-							cambios</button>
-
-					</div>
-				</div>
-			</div>
-			<!--end modal eliminar-->
-		</div>
 	</div>
 	<c:import url="footer.jsp"></c:import>
 	<script src="static/js/jquery-3.4.1.min.js"></script>

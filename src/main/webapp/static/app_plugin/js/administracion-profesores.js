@@ -1,5 +1,6 @@
 function mensajeArgegado() { swal("Profesor Agregado", "Se ha agregado el profesor exitosamente", "success") };
 function mensajeEditado() { swal("Profesor Editado", "Se ha actualizado el profesor exitosamente", "success") };
+function mensajePasswordCambiada() { swal("Contrase\u00f1a Reestablecida", "Se ha reestablesido la contrase\u00f1a por defecto exitosamente", "success") };
 
 
 $(document).ready(function () {
@@ -103,14 +104,16 @@ function obtenerListaProfesores() {
             var lista = "";
             var btnEditar = "";
             var btnEliminar = "";
+            let btnChangePassword = "";
 
             $('#tabla-profesor').empty();
             for (let i = 0; i < objeto.length; i++) {
 
-                btnEditar = "<button class='btn btn-secondary' onclick=\"editarProfesor('"+objeto[i].token+"')\">Editar</button>";
+                btnEditar = "<button class='btn btn-warning' onclick=\"editarProfesor('"+objeto[i].token+"')\">Editar</button>";
                 btnEliminar = "<button class='btn btn-danger' onclick=\"mensajeEliminarProfesor('"+objeto[i].token+"')\">Eliminar</button>";
+                btnChangePassword = `<button class="btn btn-secondary" onclick='mensajeCambiarPassword("${objeto[i].token}")' >Password</button>`;
 
-                lista = "<tr><td>" + objeto[i].nombre + "</td><td>" + objeto[i].apellido + "</td><td>" + objeto[i].especialidad + "</td><td>" + objeto[i].usuario + "</td><td>" + objeto[i].password + "</td><td>"+objeto[i].curso.numeroCurso+"</td><td>"+ btnEditar +" "+btnEliminar+"</td></tr>";
+                lista = "<tr><td>" + objeto[i].nombre + "</td><td>" + objeto[i].apellido + "</td><td>" + objeto[i].especialidad + "</td><td>" + objeto[i].usuario + "</td><td>"+objeto[i].curso.numeroCurso+"</td><td>"+btnChangePassword+" "+ btnEditar +" "+btnEliminar+"</td></tr>";
 
                 $('#tabla-profesor').prepend(lista);
 
@@ -125,6 +128,13 @@ function obtenerListaProfesores() {
         },
 
     });
+
+};
+
+
+function cambiarPassword(token){
+
+    
 
 };
 
@@ -310,6 +320,54 @@ $('#form-agregar-profesor').submit(function (event) {
 }//end if
 
 });
+
+
+function mensajeCambiarPassword(token) {
+    swal({
+        title: "Reestablecer contrase\u00f1a",
+        text: "Seguro que desea reestablecer la contrase\u00f1a?.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+        function (isConfirm) {
+            if (isConfirm) {
+                accionReestablecerPassword(token);
+            }
+        });
+};
+
+function accionReestablecerPassword(token){
+
+    $.ajax({
+        url: 'reestablecer-password/'+token,
+        type: 'post',
+        beforeSend: function(){
+
+        },
+        success: function(request){
+
+            if (request===200) {
+
+                mensajePasswordCambiada();
+            }
+
+        },
+        error: function(){
+
+        },
+        complete: function(){
+
+        }
+
+    });
+
+};
+
 
 function mensajeEliminarProfesor(token) {
     swal({
