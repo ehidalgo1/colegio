@@ -7,7 +7,7 @@ de los ramos. Ademas permite dejar constancia sobre la conducta o personalidad d
 Por medio de estos dos formularios de inserción contiene la opcion de descargar un documento en formato PDF con las notas del alumno
 y el informe de personalidad por semestre.
 
-Además contiene dos módulos de administracion en el cual puede solo ver o manejar sus datos un profesor de rol administrador, quien puede
+Además contiene dos módulos de administración en el cual puede solo ver o manejar sus datos un profesor de rol administrador, quien puede
 agregar alumnos y profesores.
 
 # Instrucciones de ejecución
