@@ -16,6 +16,6 @@ agregar alumnos y profesores.
 - El IDE debe contener instalado el plugin de Sprinboot 4
 - Se debe tener instalada la base de datos de mysql
 - Se debe crear la base de datos "bd_colegio"
-- Se debe copiar los datos del script de la base de datos dentro del proyecto en la ruta "src/static/resources"
+- Se debe copiar los datos del script de la base de datos dentro del proyecto en la ruta "src/static/resources" y ejecutarlos en la base de datos
 - Ejecutar el proyecto y listo.
 
